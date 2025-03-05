@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pague Baixo, Voe Alto</title>
+    <link rel="stylesheet" href="geral.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="script.js"></script>
+    <link rel="shortcut icon" href="./assets/Logos/airplane-svgrepo-com.svg" type="image/x-icon">
+</head>
+<body>
+    <section class="landing" id="landing">
+        <div class="header">
+            <div class="logo">
+                <a href="#">
+                    <img src="./assets/Logos/airplane-svgrepo-com.svg" alt="Pague Baixo, Voe Alto" width="80px" style="filter: invert();">
+                </a>
+            </div>
+            <div class="navigator">
+                <a href="#login">
+                    <p>LOGIN</p>
+                </a>
+                <a href="#landing">
+                    <p>SOBRE</p>
+                </a>
+                <a href="#">
+                    <p>CONTATO</p>
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="text">
+                <h1>VOE ALTO, PAGUE BAIXO</h1>
+                <h3>Os melhores voos pelos menores preços! Nosso site de comparação de preços ajuda você a encontrar as passagens aéreas mais baratas em diversas companhias e plataformas. Com uma busca rápida e eficiente, você pode economizar tempo e dinheiro, garantindo a melhor oferta para sua próxima viagem. Planeje seu voo com inteligência e aproveite as melhores oportunidades!</h3>
+            </div>
+        </div>
+    </section>
+    <section class="login" id="login">
+        <div class="fundoColorido">
+        </div>
+        <div class="conteudo-login" id="trocar">
+            <!--Para logar-->
+            <div class="form-login">
+                <form action="#" id="FormLogin">
+                    <h1>Faça login com a sua conta!</h1>
+                    <p class="p-sociais">
+                        Entre com suas redes sociais:
+                    </p>
+                    <div class="socials-image">
+                        <img src="./assets/Logos/google.svg" alt="Google" width="27px">
+                        <img src="./assets/Logos/twitter-x.svg" alt="Twitter" width="27px">
+                        <img src="./assets/Logos/apple.svg" alt="Apple" width="27px">
+                    </div>
+                    <p class="p-sociais">
+                        ou
+                    </p>
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <br><br>
+                    <input type="password" name="" id="senha" placeholder="Senha" required>
+                    <br><br>
+                    <input type="submit" value="Entrar" id="Entrar">
+                </form>
+                <!--Para Registrar-->
+                <form action="#" class="form-register" id="FormRegister">
+                    <h1>Crie sua conta!</h1>
+                    <p class="p-sociais">Você pode entrar com suas redes sociais:</p>
+                    <div class="socials-image">
+                        <img src="./assets/Logos/google.svg" alt="Google" width="27px">
+                        <img src="./assets/Logos/twitter-x.svg" alt="Twitter" width="27px">
+                        <img src="./assets/Logos/apple.svg" alt="Apple" width="27px">
+                    </div>
+                    <p class="p-sociais">
+                        ou
+                    </p>
+                    <label for="nome">Nome</label><br><br>
+                    <input type="text" name="Nome" id="Nome" required maxlength="155">
+                    <br>
+                    <label for="email">Email</label><br><br>
+                    <input type="email" name="Email" id="Email" required>
+                    <br>
+                    <label for="senha">Senha</label><br><br>
+                    <input type="password" name="Senha" id="Senha">
+                    <br><br>
+                    <input type="submit" value="Registrar" id="Entrar">
+                </form>
+            </div>
+            <div class="Registro">
+                <div>
+                    <h1 id="mensagemRegistro">Não possui registro?</h1>
+                    <br>
+                    <p id="mensagem2Registro">Registre-se no nosso site e tenha acesso aos voos mais baratos do mercado!</p>
+                    <br><br>
+                    <button class="btn-registro" id="mudar" onclick="agregar(), visualizar()">Registrar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
