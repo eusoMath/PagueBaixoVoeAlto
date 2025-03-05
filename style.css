@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #111111;
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    scroll-behavior: smooth;
+    color: #EEEEEE;
+}
+
+.landing {
+    padding: 35px 50px;
+    height: 100vh;
+    background-color: #111111;
+    background-image: url(./assets/fundo_desfocado.png); /* Corrigido: Caminho relativo */
+    background-position: center;
+    background-size: cover;
+}
+
+.header {
+    width: 90vw;
+    position: sticky;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.navigator {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+}
+
+.navigator a p:hover {
+    color: #C2B078;
+    transition: 300ms;
+}
+
+.text {
+    width: 50vw;
+    margin-left: 0px;
+    margin-top: 25vh;
+}
+
+.text h1 {
+    font-size: 3.75rem;
+    font-weight: 900;
+}
+
+.text h3 {
+    font-size: 0.9375rem;
+    font-weight: 300;
+}
+
+.login {
+    height: 100vh;
+    background-image: linear-gradient(#EEEEEE, #b1b1b1);
+    display: flex;
+    justify-content: center;
+}
+
+.fundoColorido {
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    width: 35vw;
+    height: 100vh;
+    background-image: linear-gradient(#080808, #333333);
+}
+
+.conteudo-login {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.form-login {
+    width: 75vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-login .p-sociais {
+    color: #333333;
+    padding: 30px 0px;
+}
+
+.form-login h1 {
+    color: #111111;
+    font-weight: bold;
+    font-size: 2.620rem;
+}
+
+.socials-image, .form-login p {
+    display: flex;
+    justify-self: center;
+    gap: 2.1875rem;
+}
+
+.socials-image img:hover {
+    filter: invert(30%);
+    transition: 200ms;
+}
+
+.socials-image img {
+    cursor: pointer;
+}
+
+#email, #senha {
+    display: flex;
+    justify-self: center;
+    height: 35px;
+    width: 500px;
+    border: none;
+    border-radius: 15px;
+    text-align: start;
+    padding: 0px 20px;
+    color: #333333;
+    background-color: #EEEEEE;
+}
+
+#EntrarLogin, #EntrarRegister { 
+    display: flex;
+    justify-self: center;
+    height: 35px;
+    width: 120px;
+    background-color: #333333;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+#EntrarLogin:hover, #EntrarRegister:hover {
+    background-color: #080808;
+    transition: 300ms;
+}
+
+.form-register {
+    justify-items: center;
+    display: none;
+}
+
+.Registro {
+    width: 35vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+}
+
+.form-register label {
+    color: #111111;
+}
+
+.form-register h1 {
+    color: #111111;
+    font-weight: bold;
+    font-size: 2.620rem;
+}
+
+.socials-image, .form-register p {
+    display: flex;
+    justify-self: center;
+    gap: 2.1875rem;
+}
+
+.socials-image img:hover {
+    filter: invert(30%);
+    transition: 200ms;
+}
+
+#Nome, #Email, #Senha { 
+    display: flex;
+    justify-self: center;
+    height: 35px;
+    width: 500px;
+    border: none;
+    border-radius: 15px;
+    text-align: start;
+    padding: 0px 20px;
+    color: #333333;
+    background-color: #EEEEEE;
+}
+
+.btn-registro {
+    display: flex;
+    justify-self: center;
+    padding: 10px 30px;
+    background-color: #EEEEEE;
+    color: #111111;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.btn-registro:hover {
+    background-color: #b1b1b1;
+    transition: 300ms;
+}
+
+.section-01 {
+    padding: 0px 50px;
+    height: 100vh;
+    background-image: linear-gradient(#EEEEEE, #b1b1b1);
+    background-position: center;
+    background-size: cover;
+}
+
+.fundoColorido {
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    width: 35vw;
+    height: 100vh;
+    background-image: linear-gradient(#080808, #333333);
+}
+
+.register-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.register-content {
+    width: 75vw;
+    padding: 150px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-register .p-sociais {
+    color: #333333;
+    padding: 30px 0px;
+}
+
+.form-register h1 {
+    color: #111111;
+    font-weight: bold;
+    font-size: 2.620rem;
+}
+
+.socials-image, .form-register p {
+    display: flex;
+    justify-self: center;
+    gap: 2.1875rem;
+}
+
+.socials-image img:hover {
+    filter: invert(30%);
+    transition: 200ms;
+}
+
+form input {
+    display: flex;
+    justify-self: center;
+    height: 35px;
+    width: 500px;
+    border: none;
+    border-radius: 15px;
+    text-align: start;
+    padding: 0px 20px;
+    color: #333333;
+    background-color: #EEEEEE;
+}
