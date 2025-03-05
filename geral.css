@@ -15,7 +15,7 @@
 .landing{
     padding: 35px 50px;
     height: 100vh;
-    background-image: url(/assets/fundo_desfocado.png);
+    background-image: url(assets/fundo_desfocado.png);
     background-position: center;
     background-size: cover;
 }
