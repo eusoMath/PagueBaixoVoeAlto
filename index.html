@@ -6,7 +6,6 @@
     <title>Pague Baixo, Voe Alto</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-    <script type="module" src="firebase.js"></script>
     <link rel="shortcut icon" href="./assets/Logos/airplane-svgrepo-com.svg" type="image/x-icon">
 </head>
 <body>
@@ -21,10 +20,10 @@
                 <a href="#login">
                     <p>LOGIN</p>
                 </a>
-                <a href="#landing">
+                <a href="#about">
                     <p>SOBRE</p>
                 </a>
-                <a href="#">
+                <a href="#contact">
                     <p>CONTATO</p>
                 </a>
             </div>
@@ -41,15 +40,15 @@
         </div>
         <div class="conteudo-login" id="trocar">
             <div class="form-login">
-                <form id="FormLogin">
+                <form method="dialog" id="FormLogin">
                     <h1>Faça login com a sua conta!</h1>
                     <p class="p-sociais">
                         Entre com suas redes sociais:
                     </p>
                     <div class="socials-image">
-                        <img src="./assets/Logos/google.svg" alt="Google" width="27px">
-                        <img src="./assets/Logos/twitter-x.svg" alt="Twitter" width="27px">
-                        <img src="./assets/Logos/apple.svg" alt="Apple" width="27px">
+                        <img id="Google" src="./assets/Logos/google.svg" alt="Google" width="27px" onclick="loginGoogle()">
+                        <img id="Twitter" src="./assets/Logos/twitter-x.svg" alt="Twitter" width="27px" onclick="loginTwitter()">
+                        <img id="Apple" src="./assets/Logos/apple.svg" alt="Apple" width="27px">
                     </div>
                     <p class="p-sociais">
                         ou
@@ -58,14 +57,17 @@
                     <br><br>
                     <input type="password" name="" id="senha" placeholder="Senha" required>
                     <br><br>
-                    <input  onclick="fazerLogin()" type="submit" value="Entrar" id="EntrarLogin"> </form>
-                <form class="form-register" id="FormRegister">
+                    <input onclick="loginUsuario()" type="submit" value="Entrar" id="EntrarLogin"> 
+                    <br><br>
+                    <p class="mensagemDeErro" id="mensagemDeErroLogin"></p>
+                </form>
+                <form method="dialog" class="form-register" id="FormRegister">
                     <h1>Crie sua conta!</h1>
                     <p class="p-sociais">Você pode entrar com suas redes sociais:</p>
                     <div class="socials-image">
-                        <img src="./assets/Logos/google.svg" alt="Google" width="27px">
-                        <img src="./assets/Logos/twitter-x.svg" alt="Twitter" width="27px">
-                        <img src="./assets/Logos/apple.svg" alt="Apple" width="27px">
+                        <img id="Google" onclick="loginGoogle()" src="./assets/Logos/google.svg" alt="Google" width="27px">
+                        <img id="Twitter" src="./assets/Logos/twitter-x.svg" alt="Twitter" width="27px" onclick="loginTwitter()">
+                        <img id="Apple" src="./assets/Logos/apple.svg" alt="Apple" width="27px">
                     </div>
                     <p class="p-sociais">
                         ou
@@ -79,7 +81,9 @@
                     <label for="senha">Senha</label><br><br>
                     <input type="password" name="Senha" id="Senha">
                     <br><br>
-                    <input onclick="createUserWithEmailAndPassword()" type="submit" value="Registrar" id="EntrarRegister">
+                    <input onclick="criarUsuario()" type="submit" value="Registrar" id="EntrarRegister">
+                    <br><br>
+                    <p class="mensagemDeErro" id="mensagemDeErroRegistro"></p>
                 </form>
             </div>
             <div class="Registro">
@@ -93,5 +97,27 @@
             </div>
         </div>
     </section>
+    <section id="about">
+        <div class="fundoColoridoAbout">
+        </div>
+    </section>
+    <section id="contact">
+
+    </section>
 </body>
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyA_UGAa-oEn1nruQpdMtax1LgebMJxjGIM",
+        authDomain: "voe-alto-pague-baixo.firebaseapp.com",
+        projectId: "voe-alto-pague-baixo",
+        storageBucket: "voe-alto-pague-baixo.firebasestorage.app",
+        messagingSenderId: "558666320256",
+        appId: "1:558666320256:web:801022c471379d2b3d5965"
+      };
+    
+      firebase.initializeApp(firebaseConfig);
+
+  </script>
 </html>
