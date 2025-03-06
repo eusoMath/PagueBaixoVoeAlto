@@ -11,9 +11,7 @@ const firebaseConfig = {
     messagingSenderId: "558666320256",
     appId: "1:558666320256:web:801022c471379d2b3d5965"
   };
-  
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth();
+const app = initializeApp(firebaseConfig);
 
 const Nome = document.getElementById("Nome").value;
 const Email = document.getElementById("Email").value;
@@ -21,18 +19,19 @@ const Senha = document.getElementById("Senha").value;
 const EmailLogin = document.getElementById("email").value;
 const SenhaLogin = document.getElementById("senha").value;
 
+const auth = getAuth();
 
 createUserWithEmailAndPassword(auth, Email, Senha)
-.then((userCredential) => {
-  // Signed up 
-  const user = userCredential.user;
-  // ...
-})
-.catch((error) => {
-  const errorCode = error.code;
-  const errorMessage = error.message;
-  // ..
-});
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
 
   signInWithEmailAndPassword(auth, EmailLogin, SenhaLogin)
   .then((userCredential) => {
