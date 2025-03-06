@@ -1,7 +1,9 @@
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
-  const firebaseConfig = {
+
+
+const firebaseConfig = {
     apiKey: "AIzaSyA_UGAa-oEn1nruQpdMtax1LgebMJxjGIM",
     authDomain: "voe-alto-pague-baixo.firebaseapp.com",
     projectId: "voe-alto-pague-baixo",
@@ -11,39 +13,28 @@
   };
   
   const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
 
-  export const auth = getAuth()
+const Nome = document.getElementById("Nome").value;
+const Email = document.getElementById("Email").value;
+const Senha = document.getElementById("Senha").value;
+const EmailLogin = document.getElementById("email").value;
+const SenhaLogin = document.getElementById("senha").value;
 
-  const Nome = document.getElementById("Nome").value;
-  const Email = document.getElementById("Email").value;
-  const Senha = document.getElementById("Senha").value;
-  /*  
-  function handleGoogleSignIn() {
-    const provider = new GoogleAuthProvider();
 
-    signInWithPopup(auth, provider)
-    .then((result) => {
-        console.log(result);
-    })
-    .cath((error) => {
-        console.log(error);
-    });
+createUserWithEmailAndPassword(auth, Email, Senha)
+.then((userCredential) => {
+  // Signed up 
+  const user = userCredential.user;
+  // ...
+})
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  // ..
+});
 
-  }
-    */
-  createUserWithEmailAndPassword(auth, Email, Senha)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-
-  signInWithEmailAndPassword(auth, Email, Senha)
+  signInWithEmailAndPassword(auth, EmailLogin, SenhaLogin)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
@@ -53,15 +44,3 @@
     const errorCode = error.code;
     const errorMessage = error.message;
   });
-
- onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/auth.user
-    const uid = user.uid;
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
