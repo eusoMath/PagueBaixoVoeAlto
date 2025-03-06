@@ -1,5 +1,5 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyA_UGAa-oEn1nruQpdMtax1LgebMJxjGIM",
@@ -9,6 +9,8 @@
     messagingSenderId: "558666320256",
     appId: "1:558666320256:web:801022c471379d2b3d5965"
   };
+  
+  const app = initializeApp(firebaseConfig);
 
   export const auth = getAuth()
 
