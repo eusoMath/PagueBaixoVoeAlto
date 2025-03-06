@@ -6,6 +6,7 @@
     <title>Pague Baixo, Voe Alto</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script type="module" src="firebase.js"></script>
     <link rel="shortcut icon" href="./assets/Logos/airplane-svgrepo-com.svg" type="image/x-icon">
 </head>
 <body>
@@ -57,7 +58,7 @@
                     <br><br>
                     <input type="password" name="" id="senha" placeholder="Senha" required>
                     <br><br>
-                    <input type="submit" value="Entrar" id="EntrarLogin"> </form>
+                    <input  onclick="signInWithEmailAndPassword()" type="submit" value="Entrar" id="EntrarLogin"> </form>
                 <form action="#" class="form-register" id="FormRegister">
                     <h1>Crie sua conta!</h1>
                     <p class="p-sociais">Você pode entrar com suas redes sociais:</p>
@@ -78,7 +79,8 @@
                     <label for="senha">Senha</label><br><br>
                     <input type="password" name="Senha" id="Senha">
                     <br><br>
-                    <input type="submit" value="Registrar" id="EntrarRegister"> </form>
+                    <input onclick="createUserWithEmailAndPassword()" type="submit" value="Registrar" id="EntrarRegister">
+                </form>
             </div>
             <div class="Registro">
                 <div>
