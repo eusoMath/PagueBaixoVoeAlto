@@ -201,7 +201,7 @@
     display: flex;
     justify-self: center;
     padding: 10px 30px;
-    background-color: #EEEEEE;
+    background-color: #C2B078;
     color: #111111;
     border: none;
     border-radius: 15px;
@@ -209,7 +209,7 @@
 }
 
 .btn-registro:hover {
-    background-color: #b1b1b1;
+    filter: brightness(70%);
     transition: 300ms;
     cursor: pointer;
 }
@@ -322,6 +322,10 @@ form input {
     /*text-align: center;*/
 }
 
+.content strong {
+    color: #D3C188;
+}
+
 .content p {
     font-size: 1.56rem;
 }
@@ -330,8 +334,13 @@ form input {
     padding: 50px;
 }
 
+.divisor {
+    height: 5px;
+    background-color: #C2B078;
+}
+
 #contact {
-    height: 100vh;
-    background-image: linear-gradient(#EEEEEE, #b1b1b1);
+    height: 40vh;
+    background-color: #b1b1b1;
     justify-content: space-between;
 }
