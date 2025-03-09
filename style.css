@@ -201,7 +201,7 @@
     display: flex;
     justify-self: center;
     padding: 10px 30px;
-    background-color: #EEEEEE;
+    background-color: #C2B078;
     color: #111111;
     border: none;
     border-radius: 15px;
@@ -209,7 +209,7 @@
 }
 
 .btn-registro:hover {
-    background-color: #b1b1b1;
+    filter: brightness(70%);
     transition: 300ms;
     cursor: pointer;
 }
@@ -292,17 +292,55 @@ form input {
     height: 100vh;
     background-image: linear-gradient(#080808, #333333);
 }
-/*
-.fundoColoridoAbout {
-    position: absolute;
-    z-index: 0;
-    right: 0;
-    width: 35vw;
+
+#about {
+    display: flex;
     height: 100vh;
-    background-image: linear-gradient(#b1b1b1, #EEEEEE);
+    position: relative;
+    overflow: hidden;
 }
-*/
+
+.fundoColoridoAbout {
+    width: 35vw;
+    height: 100%;
+    background-image: url(./assets/Novo\ Projeto.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.content {
+    width: 65vw;
+    display: flex;
+    color: #b1b1b1;
+    justify-content: center;
+    align-items: center;
+    margin-top: -150px;
+}
+
+.content h1 {
+    font-size: 4.6875rem;
+    /*text-align: center;*/
+}
+
+.content strong {
+    color: #D3C188;
+}
+
+.content p {
+    font-size: 1.56rem;
+}
+
+.content .text {
+    padding: 50px;
+}
+
+.divisor {
+    height: 5px;
+    background-color: #C2B078;
+}
+
 #contact {
-    height: 100vh;
-    background-image: linear-gradient(#EEEEEE, #b1b1b1);
+    height: 40vh;
+    background-color: #b1b1b1;
+    justify-content: space-between;
 }
