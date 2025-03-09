@@ -290,7 +290,7 @@ form input {
 
 #about {
     height: 100vh;
-    background-image: linear-gradient(#080808, #333333);
+    background-image: linear-gradient(#080808, #131313, #080808);
 }
 
 #about {
@@ -310,11 +310,15 @@ form input {
 
 .content {
     width: 65vw;
+    height: 35;
     display: flex;
+    flex-direction: column;
     color: #b1b1b1;
-    justify-content: center;
-    align-items: center;
-    margin-top: -150px;
+    padding: 50px;
+}
+
+.text {
+    height: 650px;
 }
 
 .content h1 {
@@ -330,17 +334,34 @@ form input {
     font-size: 1.56rem;
 }
 
-.content .text {
-    padding: 50px;
-}
-
 .divisor {
     height: 5px;
     background-color: #C2B078;
 }
 
 #contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+    color:#131313;
     height: 40vh;
-    background-color: #b1b1b1;
-    justify-content: space-between;
+    background-color: #D3C188;
+    padding: 50px 50px;
+}
+
+.caixa-footer {
+    width: 50px;
+    justify-items: center;
+}
+
+.caixa-footer p {
+    color: #080808;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.caixa-footer:hover {
+    filter: invert(35%);
+    transition: 300ms;
 }
