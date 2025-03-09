@@ -362,6 +362,6 @@ form input {
 }
 
 .caixa-footer:hover {
-    filter: invert(35%);
+    filter: invert(10%);
     transition: 300ms;
 }
