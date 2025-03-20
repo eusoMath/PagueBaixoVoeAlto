@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
     <title>Document</title>
 </head>
 <body>
+  <section>
     <h1>Bem-vindo à Página Inicial!</h1>
     <p id="nomeUsuario"></p>
+    <div class="container">
+      <div class="localDePartida">
+        <label for="localPartida">de:</label>
+        <br>
+        <input type="text" id="localPartida">
+      </div>
+      <div class="localDeChegada">
+        <label for="localDeChegada">para:</label>
+        <br>
+        <input type="text">
+      </div>
+    </div>
+    <input type="button" value="buscar">
+  </section>
 
   <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-auth-compat.js"></script>
