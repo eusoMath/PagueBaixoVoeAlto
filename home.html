@@ -7,27 +7,29 @@
     <title>Document</title>
 </head>
 <body>
-  <section>
-    <h1>Bem-vindo à Página Inicial!</h1>
-    <p id="nomeUsuario"></p>
-    <div class="container">
-      <div class="localDePartida">
-        <label for="localPartida">de:</label>
-        <br>
-        <input type="text" id="localPartida">
-      </div>
-      <div class="localDeChegada">
-        <label for="localDeChegada">para:</label>
-        <br>
-        <input type="text">
-      </div>
-    </div>
-    <input type="button" value="buscar">
-  </section>
+    <section>
+        <h1>Bem-vindo à Página Inicial!</h1>
+        <p id="nomeUsuario"></p>
+        <div class="container">
+            <div class="localDePartida">
+                <input type="text" id="localPartidaInput" list="sugestoesPartida">
+                <datalist id="sugestoesPartida"></datalist>
+            </div>
+            <div class="localDeChegada">
+                <input type="text" id="localChegadaInput" list="sugestoesChegada">
+                <datalist id="sugestoesChegada"></datalist>
+            </div>
+        </div>
+        <div class="data">
+            <input type="date" id="dataDePartida">
+        </div>
+        <input type="button" value="buscar" id="Buscar">
+    </section>
 
-  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-database-compat.js"></script>
-  <script type="module" src="home.js"></script>
 </body>
+<script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-database-compat.js"></script>
+<script type="module" src="/autocomplete.js"></script>
+<script type="module" src="/buscar.js"></script>
 </html>
