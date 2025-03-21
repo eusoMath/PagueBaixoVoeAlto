@@ -1,65 +1,74 @@
-export let partidaId = "";
-export let chegadaId = "";
+// autocomplete.js
 
-// Obtém as referências aos elementos datalist
-const sugestoesPartidaLista = document.getElementById("sugestoesPartida");
-const sugestoesChegadaLista = document.getElementById("sugestoesChegada");
+const apiKey = '0bfc4cee93msh2bf7f105650ac0ep136bcdjsn20c6d63f41d3'; // Substitua pela sua API key
 
-async function autocomplete(inputElement, datalistElement, idVariable) {
-    const query = inputElement.value;
+let partidaId = '';
+let chegadaId = '';
 
-    datalistElement.innerHTML = "";
-
-    if (!query) {
-        return;
+async function buscarSugestoes(termo) {
+  const url = `https://skyscanner80.p.rapidapi.com/api/v1/flights/auto-complete?query=${termo}&market=BR&locale=pt-BR`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': apiKey,
+      'x-rapidapi-host': 'skyscanner80.p.rapidapi.com'
     }
+  };
 
-    const url = `https://skyscanner80.p.rapidapi.com/api/v1/flights/auto-complete?query=${query}&market=BR&locale=pt-BR`;
-    const options = {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-key': '0bfc4cee93msh2bf7f105650ac0ep136bcdjsn20c6d63f41d3',
-            'x-rapidapi-host': 'skyscanner80.p.rapidapi.com'
-        }
-    };
-
-    try {
-        const response = await fetch(url, options);
-
-        if (!response.ok) {
-            throw new Error(`Erro na requisição: ${response.status}`);
-        }
-
-        const result = await response.json();
-
-        if (result && result.data && Array.isArray(result.data)) {
-            result.data.forEach(item => {
-                const option = document.createElement("option");
-                option.value = item.presentation.suggestionTitle;
-                datalistElement.appendChild(option);
-
-                // Adiciona um ouvinte de evento de clique a cada sugestão
-                option.addEventListener("click", function() {
-                    inputElement.value = item.presentation.suggestionTitle;
-                    datalistElement.innerHTML = "";
-                    if (idVariable === partidaId) {
-                        partidaId = item.navigation.entityId;
-                    } else if (idVariable === chegadaId) {
-                        chegadaId = item.navigation.entityId;
-                    }
-                    console.log("ID selecionado:", item.navigation.entityId);
-                    console.log("partidaId:", partidaId, "chegadaId:", chegadaId);
-                    document.getElementById("Buscar").disabled = false; // Habilita o botão
-                });
-            });
-        } else {
-            console.error("A resposta da API não contém 'data' ou 'data' não é um array.");
-        }
-
-    } catch (error) {
-        console.error(error);
-    }
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    return result.data || []; // Retorna um array de lugares ou um array vazio
+  } catch (error) {
+    console.error('Erro ao buscar sugestões:', error);
+    return [];
+  }
 }
 
-localPartidaInput.addEventListener("input", () => autocomplete(localPartidaInput, sugestoesPartidaLista, partidaId));
-localChegadaInput.addEventListener("input", () => autocomplete(localChegadaInput, sugestoesChegadaLista, chegadaId));
+async function configurarAutocomplete(inputId, datalistId, idHiddenInputId, idVariable) {
+  const inputElement = document.getElementById(inputId);
+  const datalistElement = document.getElementById(datalistId);
+
+  inputElement.addEventListener('input', async () => {
+    const termo = inputElement.value;
+    if (termo.length < 3) {
+      datalistElement.innerHTML = ''; // Limpa as sugestões se o termo for curto
+      return;
+    }
+
+    const sugestoes = await buscarSugestoes(termo);
+    datalistElement.innerHTML = ''; // Limpa as sugestões anteriores
+
+    sugestoes.forEach(sugestao => {
+      const option = document.createElement('option');
+      option.value = sugestao.presentation.suggestionTitle; // Usa suggestionTitle como label
+      option.dataset.placeId = sugestao.id; // Armazena o ID no dataset
+      datalistElement.appendChild(option);
+    });
+  });
+
+  inputElement.addEventListener('change', () => {
+    const selectedOption = datalistElement.querySelector(`option[value="${inputElement.value}"]`);
+    if (selectedOption) {
+      if (idVariable === 'partidaId') {
+        partidaId = selectedOption.dataset.placeId;
+      } else if (idVariable === 'chegadaId') {
+        chegadaId = selectedOption.dataset.placeId;
+      }
+      console.log(`ID selecionado (${idVariable}):`, selectedOption.dataset.placeId);
+    } else {
+      if (idVariable === 'partidaId') {
+        partidaId = '';
+      } else if (idVariable === 'chegadaId') {
+        chegadaId = '';
+      }
+    }
+  });
+}
+
+// Configura os autocompletes para os campos de partida e chegada
+configurarAutocomplete('localPartidaInput', 'sugestoesPartida', 'idPartidaHidden', 'partidaId');
+configurarAutocomplete('localChegadaInput', 'sugestoesChegada', 'idChegadaHidden', 'chegadaId');
+
+// Exporta as variáveis partidaId e chegadaId
+export { partidaId, chegadaId };

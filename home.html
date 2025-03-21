@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="home.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="home.css">
+  <title>Document</title>
 </head>
 <body>
-    <section>
-        <h1>Bem-vindo à Página Inicial!</h1>
-        <p id="nomeUsuario"></p>
-        <div class="container">
-            <div class="localDePartida">
-                <input type="text" id="localPartidaInput" list="sugestoesPartida">
-                <datalist id="sugestoesPartida"></datalist>
-            </div>
-            <div class="localDeChegada">
-                <input type="text" id="localChegadaInput" list="sugestoesChegada">
-                <datalist id="sugestoesChegada"></datalist>
-            </div>
-        </div>
-        <div class="data">
-            <input type="date" id="dataDePartida">
-        </div>
-        <input type="button" value="buscar" id="Buscar">
-    </section>
+  <section>
+    <h1>Bem-vindo à Página Inicial!</h1>
+    <p id="nomeUsuario"></p>
+    <div class="container">
+      <div class="localDePartida">
+        <input type="text" id="localPartidaInput" list="sugestoesPartida">
+        <datalist id="sugestoesPartida"></datalist>
+        <input type="hidden" id="idPartidaHidden"> </div>
+      <div class="localDeChegada">
+        <input type="text" id="localChegadaInput" list="sugestoesChegada">
+        <datalist id="sugestoesChegada"></datalist>
+        <input type="hidden" id="idChegadaHidden"> </div>
+    </div>
+    <div class="data">
+      <input type="date" id="dataDePartida">
+    </div>
+    <input type="button" value="buscar" id="Buscar">
+  </section>
 
 </body>
 <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
