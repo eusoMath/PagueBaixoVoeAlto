@@ -1,30 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="home.css">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>Document</title>
 </head>
 <body>
-  <section>
-    <h1>Bem-vindo à Página Inicial!</h1>
-    <p id="nomeUsuario"></p>
-    <div class="container">
-      <div class="localDePartida">
-        <input type="text" id="localPartidaInput" list="sugestoesPartida">
-        <datalist id="sugestoesPartida"></datalist>
-        <input type="hidden" id="idPartidaHidden"> </div>
-      <div class="localDeChegada">
-        <input type="text" id="localChegadaInput" list="sugestoesChegada">
-        <datalist id="sugestoesChegada"></datalist>
-        <input type="hidden" id="idChegadaHidden"> </div>
-    </div>
-    <div class="data">
-      <input type="date" id="dataDePartida">
-    </div>
-    <input type="button" value="buscar" id="Buscar">
-  </section>
+    <section>
+        <h1>Bem-vindo à Página Inicial!</h1>
+        <p id="nomeUsuario"></p>
+        <div class="container">
+            <div class="localDePartida">
+                <input type="text" id="localPartidaInput" list="sugestoesPartida" autocomplete="off">
+                <datalist id="sugestoesPartida"></datalist>
+                <input type="hidden" id="idPartidaHidden">
+            </div>
+            <div class="localDeChegada">
+                <input type="text" id="localChegadaInput" list="sugestoesChegada" autocomplete="off">
+                <datalist id="sugestoesChegada"></datalist>
+                <input type="hidden" id="idChegadaHidden">
+            </div>
+        </div>
+        <div class="data">
+            <input type="date" id="dataDePartida">
+        </div>
+        <div class="passageiros">
+            <label for="adultos">Adultos:</label>
+            <input type="number" id="adultos" placeholder="Adultos" value="1">
+            <label for="criancas">Crianças:</label>
+            <input type="number" id="criancas" placeholder="Crianças" value="0">
+            <label for="bebes">Bebês:</label>
+            <input type="number" id="bebes" placeholder="Bebês" value="0">
+        </div>
+        <div class="classe-cabine">
+            <label for="classeCabine">Classe da Cabine:</label>
+            <select id="classeCabine">
+                <option value="economy">Econômica</option>
+                <option value="premium_economy">Econômica Premium</option>
+                <option value="business">Executiva</option>
+                <option value="first">Primeira Classe</option>
+            </select>
+        </div>
+        <input type="button" value="buscar" id="Buscar">
+        <div id="resultados"></div>
+    </section>
 
 </body>
 <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>

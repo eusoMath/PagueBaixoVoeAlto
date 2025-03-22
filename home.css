@@ -11,3 +11,22 @@
     font-style: normal;
     scroll-behavior: smooth;
 }
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 300px; /* Ajuste a largura conforme necessário */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.card h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 1em;
+}
