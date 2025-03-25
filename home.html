@@ -7,49 +7,112 @@
     <title>Document</title>
 </head>
 <body>
-    <section>
-        <h1>Bem-vindo à Página Inicial!</h1>
-        <p id="nomeUsuario"></p>
+    <section class="sect-1">
         <div class="container">
+            <!--
+            <h1>Bem-vindo à Página Inicial!</h1>
+            <p id="nomeUsuario"></p>
+            -->
             <div class="localDePartida">
-                <input type="text" id="localPartidaInput" list="sugestoesPartida" autocomplete="off">
+                <label for="localPartidaInput">De:</label>
+                <input type="text" placeholder="Local de Partida" id="localPartidaInput" list="sugestoesPartida" autocomplete="off">
                 <datalist id="sugestoesPartida"></datalist>
                 <input type="hidden" id="idPartidaHidden">
             </div>
             <div class="localDeChegada">
-                <input type="text" id="localChegadaInput" list="sugestoesChegada" autocomplete="off">
+                <label for="localChegadaInput">Para:</label>
+                <input type="text" id="localChegadaInput" placeholder="Local de Chegada" list="sugestoesChegada" autocomplete="off">
                 <datalist id="sugestoesChegada"></datalist>
                 <input type="hidden" id="idChegadaHidden">
             </div>
+            <div class="data">
+                <label for="dataDePartida">Data:</label>
+                <input type="date" id="dataDePartida">
+            </div>
+            <div class="adultos">
+                <label for="adultos">Adultos:</label>
+                <input type="number" id="adultos" placeholder="Adultos" value="1">
+            </div>
+            <div class="criancas">
+                <label for="criancas">Crianças:</label>
+                <input type="number" id="criancas" placeholder="Crianças" value="0">
+            </div>
+            <div class="bebes">
+                <label for="bebes">Bebês:</label>
+                <input type="number" id="bebes" placeholder="Bebês" value="0">
+            </div>
+            <div class="classe-cabine">
+                <label for="classeCabine">Classe da Cabine:</label>
+                <select id="classeCabine">
+                    <option value="economy">Econômica</option>
+                    <option value="premium_economy">Econômica Premium</option>
+                    <option value="business">Executiva</option>
+                    <option value="first">Primeira Classe</option>
+                </select>
+            </div>
+            <input type="button" value="buscar" id="Buscar">
         </div>
-        <div class="data">
-            <input type="date" id="dataDePartida">
-        </div>
-        <div class="passageiros">
-            <label for="adultos">Adultos:</label>
-            <input type="number" id="adultos" placeholder="Adultos" value="1">
-            <label for="criancas">Crianças:</label>
-            <input type="number" id="criancas" placeholder="Crianças" value="0">
-            <label for="bebes">Bebês:</label>
-            <input type="number" id="bebes" placeholder="Bebês" value="0">
-        </div>
-        <div class="classe-cabine">
-            <label for="classeCabine">Classe da Cabine:</label>
-            <select id="classeCabine">
-                <option value="economy">Econômica</option>
-                <option value="premium_economy">Econômica Premium</option>
-                <option value="business">Executiva</option>
-                <option value="first">Primeira Classe</option>
-            </select>
-        </div>
-        <input type="button" value="buscar" id="Buscar">
+        <div class="divisor"></div>
         <div id="resultados"></div>
+        <div id="resultados">
+            <div class="card">
+              <h3>Preço: R$ 350,00</h3>
+              <p>Partida: 20/06/2024 - 10:00</p>
+              <p>Chegada: 20/06/2024 - 14:30</p>
+              <p>Duração: 4h 30m</p>
+              <p>Companhia Aérea: Exemplo Airlines</p>
+              <button>Comprar</button>
+            </div>
+            <div class="card">
+              <h3>Preço: R$ 420,00</h3>
+              <p>Partida: 21/06/2024 - 08:00</p>
+              <p>Chegada: 21/06/2024 - 12:15</p>
+              <p>Duração: 4h 15m</p>
+              <p>Companhia Aérea: Outra Companhia</p>
+              <button>Comprar</button>
+            </div>
+              <div class="card">
+              <h3>Preço: R$ 200,00</h3>
+              <p>Partida: 20/06/2024 - 10:00</p>
+              <p>Chegada: 20/06/2024 - 14:30</p>
+              <p>Duração: 4h 30m</p>
+              <p>Companhia Aérea: Exemplo Airlines</p>
+              <button>Comprar</button>
+            </div>
+            <div class="card">
+              <h3>Preço: R$ 600,00</h3>
+              <p>Partida: 21/06/2024 - 08:00</p>
+              <p>Chegada: 21/06/2024 - 12:15</p>
+              <p>Duração: 4h 15m</p>
+              <p>Companhia Aérea: Outra Companhia</p>
+              <button>Comprar</button>
+            </div>
+              <div class="card">
+              <h3>Preço: R$ 100,00</h3>
+              <p>Partida: 20/06/2024 - 10:00</p>
+              <p>Chegada: 20/06/2024 - 14:30</p>
+              <p>Duração: 4h 30m</p>
+              <p>Companhia Aérea: Exemplo Airlines</p>
+              <button>Comprar</button>
+            </div>
+            <div class="card">
+              <h3>Preço: R$ 800,00</h3>
+              <p>Partida: 21/06/2024 - 08:00</p>
+              <p>Chegada: 21/06/2024 - 12:15</p>
+              <p>Duração: 4h 15m</p>
+              <p>Companhia Aérea: Outra Companhia</p>
+              <button>Comprar</button>
+            </div>
+        </div>
+          <button id="mostrarMaisButton">Mostrar Mais</button>
     </section>
 
 </body>
 <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-database-compat.js"></script>
+<!--
 <script type="module" src="/autocomplete.js"></script>
 <script type="module" src="/buscar.js"></script>
+-->
 </html>

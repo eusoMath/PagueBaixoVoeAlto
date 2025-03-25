@@ -102,12 +102,24 @@ function exibirResultados(dados) {
 
             const marketingCarrier = document.createElement("p");
             marketingCarrier.textContent = `Companhia Aérea: ${itinerary.legs[0].carriers.marketing[0].name}`;
+            const comprarButton = document.createElement("button");
+            comprarButton.textContent = "Comprar";
+            comprarButton.addEventListener("click", () => {
+                // Adicione aqui a lógica para lidar com a compra do voo
+                console.log("Comprar voo:", itinerary);
+                alert("Funcionalidade de compra em desenvolvimento!")
+                // Você pode redirecionar o usuário para uma página de compra, por exemplo
+                // window.location.href = "/pagina-de-compra?id=" + itinerary.id;
+            });
+
+            
 
             card.appendChild(price);
             card.appendChild(departure);
             card.appendChild(arrival);
             card.appendChild(duration);
             card.appendChild(marketingCarrier);
+            card.appendChild(comprarButton);
 
             resultadosDiv.appendChild(card);
         });
