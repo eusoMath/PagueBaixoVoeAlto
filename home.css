@@ -25,6 +25,7 @@
 .container {
     display: flex;
     justify-content: space-around;
+    gap: 10px;
     padding: 20px 50px;
     background-color: #EEEEEE;
     height: 120px;
@@ -33,10 +34,26 @@
 
 .container label {
     color: #111111;
+    font-size: 15px;
+}
+
+#Buscar {
+    padding: 8px;
+    background-color: #C2B078;
+    color: #000000;
+    font-weight: bolder;
+    border: none;
+    cursor: pointer;
+}
+
+#Buscar:hover {
+    filter: brightness(95%);
+    transition: 200ms;
 }
 
 #resultados {
-    display: flex;
+    flex-basis: 50%;
+
     align-items: center;
 }
 
@@ -53,6 +70,7 @@
     height: 35px;
     padding-left: 5px;
     color: #111111;
+    border-radius: 5px;
 }
 
 .container option {
@@ -71,6 +89,7 @@
 }
 
 .card button {
+    margin-top: 10px;
     font-weight: bold;
     border: none;
     color: #111111;
