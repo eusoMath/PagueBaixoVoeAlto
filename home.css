@@ -34,7 +34,7 @@
 
 .container label {
     color: #111111;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 #Buscar {
@@ -52,17 +52,20 @@
 }
 
 #resultados {
-    flex-basis: 50%;
-
-    align-items: center;
-}
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    padding: 20px;
+  }
+  
 
 .card {
     background-image: linear-gradient(#EEEEEE, #dddddd);
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
-    width: 310px; /* Ajuste a largura conforme necessário */
+    width: 310px;
     height: 180px;
 }
 
@@ -102,5 +105,48 @@
 
 .card button:hover {
     filter: brightness(95%);
+    transition: 300ms;
+}
+
+#mostrarMaisButton {
+    display: flex;
+    padding: 10px;
+    color:#111111;
+    background-color: #C2B078;
+    justify-self: center;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+#mostrarMaisButton:hover {
+    filter: brightness(90%);
+    transition: 300ms;
+}
+#contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+    color:#131313;
+    height: 40vh;
+    background-color: #EEEEEE;
+    padding: 50px 50px;
+}
+
+.caixa-footer {
+    width: 50px;
+    justify-items: center;
+}
+
+.caixa-footer p {
+    color: #080808;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.caixa-footer:hover {
+    filter: invert(10%);
     transition: 300ms;
 }
