@@ -1,6 +1,8 @@
 // autocomplete.js
+// Chave API: 0bfc4cee93msh2bf7f105650ac0ep136bcdjsn20c6d63f41d3
+// Chave API reserva:c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd
 
-const apiKey = '0bfc4cee93msh2bf7f105650ac0ep136bcdjsn20c6d63f41d3'; // Substitua pela sua API key
+const apiKey = 'c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd'; // Substitua pela sua API key
 
 let partidaId = '';
 let chegadaId = '';

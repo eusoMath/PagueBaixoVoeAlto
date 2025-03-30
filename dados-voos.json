@@ -1,0 +1,246 @@
+{
+    "data": {
+      "itineraries": [
+        {
+          "price": {
+            "formatted": "R$ 350,00",
+            "raw": 350.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-20T10:00:00",
+              "arrival": "2024-06-20T14:30:00",
+              "durationInMinutes": 270,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Exemplo Airlines"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 420,00",
+            "raw": 420.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-21T08:00:00",
+              "arrival": "2024-06-21T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Outra Companhia"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 500,00",
+            "raw": 500.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-22T12:00:00",
+              "arrival": "2024-06-22T16:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Companhia Terceira"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 380,00",
+            "raw": 380.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-23T15:00:00",
+              "arrival": "2024-06-23T19:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voo Rápido"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 450,00",
+            "raw": 450.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-24T09:00:00",
+              "arrival": "2024-06-24T13:30:00",
+              "durationInMinutes": 270,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Aero Exemplo"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 520,00",
+            "raw": 520.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-25T11:00:00",
+              "arrival": "2024-06-25T15:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Companhia do Céu"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 400,00",
+            "raw": 400.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-26T14:00:00",
+              "arrival": "2024-06-26T18:30:00",
+              "durationInMinutes": 270,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voando Alto"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 480,00",
+            "raw": 480.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-27T07:00:00",
+              "arrival": "2024-06-27T11:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Aero Rápido"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 550,00",
+            "raw": 550.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-28T13:00:00",
+              "arrival": "2024-06-28T17:30:00",
+              "durationInMinutes": 270,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Céu Azul"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 430,00",
+            "raw": 430.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-29T16:00:00",
+              "arrival": "2024-06-29T20:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Companhia do Vento"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 510,00",
+            "raw": 510.00
+          },
+          "legs": [
+            {
+              "departure": "2024-06-30T10:00:00",
+              "arrival": "2024-06-30T14:30:00",
+              "durationInMinutes": 270,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Rumo ao Sol"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+} 
