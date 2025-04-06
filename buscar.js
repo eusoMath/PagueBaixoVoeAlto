@@ -1,8 +1,12 @@
+//API ORIGINAL = 0bfc4cee93msh2bf7f105650ac0ep136bcdjsn20c6d63f41d3
+//API RESERVA = c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd
+
+const apiKey = "c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd"
+
 import { partidaId, chegadaId } from './autocomplete.js';
 
 let voosExibidos = 5; // Quantidade inicial de voos exibidos
 let cache = {}; // Objeto para armazenar os resultados da API em cache
-let voosSelecionados = []; // Lista para armazenar os voos selecionados para comparação
 
 async function buscarVoo() {
     let data = document.getElementById("dataDePartida").value;
@@ -18,7 +22,7 @@ async function buscarVoo() {
 
     console.log("partidaId (antes da codificação):", partidaId, "chegadaId (antes da codificação):", chegadaId);
 
-    const url = `https://skyscanner80.p.rapidapi.com/api/v1/flights/search-one-way?fromId=${partidaId}&toId=${chegadaId}&departDate=${data}&adults=${adultos}&children=${criancas}&infants=${bebes}&cabinClass=${classeCabine}&market=BR&locale=pt-BR`;
+    const url = `https://skyscanner80.p.rapidapi.com/api/v1/flights/search-one-way?fromId=${partidaId}&toId=${chegadaId}&departDate=${data}&adults=${adultos}&children=${criancas}&infants=${bebes}&cabinClass=${classeCabine}&market=BR&locale=pt-BR&currency=BRL`;
 
     console.log("URL da requisição de busca de voos:", url);
 
@@ -32,7 +36,7 @@ async function buscarVoo() {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': 'c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd',
+            'x-rapidapi-key': apiKey,
             'x-rapidapi-host': 'skyscanner80.p.rapidapi.com'
         }
     };
@@ -59,13 +63,14 @@ async function buscarVoo() {
 
 function exibirResultados(dados) {
     let resultadosDiv = document.getElementById("resultados");
+    /*
     if (!resultadosDiv) {
         resultadosDiv = document.createElement("div");
         resultadosDiv.id = "resultados";
         document.querySelector("section").appendChild(resultadosDiv);
     }
+    */
     resultadosDiv.innerHTML = ''; // Limpa os resultados anteriores
-
     if (dados && dados.data && dados.data.itineraries) {
         // Ordena os itinerários por preço (do menor para o maior)
         dados.data.itineraries.sort((a, b) => a.price.raw - b.price.raw);
@@ -103,7 +108,6 @@ function exibirResultados(dados) {
 
             const marketingCarrier = document.createElement("p");
             marketingCarrier.textContent = `Companhia Aérea: ${itinerary.legs[0].carriers.marketing[0].name}`;
-
             const comprarButton = document.createElement("button");
             comprarButton.textContent = "Comprar";
             comprarButton.addEventListener("click", () => {
@@ -114,16 +118,7 @@ function exibirResultados(dados) {
                 // window.location.href = "/pagina-de-compra?id=" + itinerary.id;
             });
 
-            // Cria o checkbox de comparação
-            const checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.name = "Comparar";
-            checkbox.id = "Comparar" + itinerary.id; // Adiciona um ID único ao checkbox
-
-            // Cria o label associado ao checkbox
-            const label = document.createElement("label");
-            label.htmlFor = "Comparar" + itinerary.id;
-            label.textContent = "Comparar";
+            
 
             card.appendChild(price);
             card.appendChild(departure);
@@ -131,93 +126,32 @@ function exibirResultados(dados) {
             card.appendChild(duration);
             card.appendChild(marketingCarrier);
             card.appendChild(comprarButton);
-            card.appendChild(checkbox); // Adiciona o checkbox ao card
-            card.appendChild(label); // Adiciona o label ao card
 
             resultadosDiv.appendChild(card);
         });
 
         // Adiciona o botão "Mostrar Mais" se houver mais voos para exibir
         if (voosExibidos < dados.data.itineraries.length) {
-            const mostrarMaisButton = document.createElement("button");
-            mostrarMaisButton.textContent = "Mostrar Mais";
+            const mostrarMaisButton = document.getElementById("mostrarMaisButton");
+            mostrarMaisButton.style.display = "block";
             mostrarMaisButton.addEventListener("click", () => {
-                voosExibidos += 5; // Aumenta a quantidade de voos exibidos
+                voosExibidos += 4; // Aumenta a quantidade de voos exibidos
+                document.getElementById("sect1").style.height = "fit-content";
                 exibirResultados(dados); // Atualiza a exibição dos voos
             });
-            resultadosDiv.appendChild(mostrarMaisButton);
+            document.getElementById("sect01").appendChild(mostrarMaisButton);
         }
     } else {
         resultadosDiv.textContent = "Nenhum resultado encontrado.";
     }
 }
 
-function compararVoos() {
-    const resultadosDiv = document.getElementById('resultados');
-
-    if (!resultadosDiv) {
-        console.error("Elemento 'resultados' não encontrado.");
-        return;
-    }
-
-    const voosParaComparar = voosSelecionados.map(index => {
-        if (index >= 0 && index < resultadosDiv.children.length && resultadosDiv.children[index]) {
-            return resultadosDiv.children[index].cloneNode(true);
-        } else {
-            console.error(`Índice inválido ou elemento não encontrado: ${index}`);
-            return null;
-        }
-    }).filter(card => card !== null);
-
-    const sectionComparacao = document.createElement('section');
-    sectionComparacao.id = 'comparacao';
-
-    voosParaComparar.forEach(card => {
-        sectionComparacao.appendChild(card);
-    });
-
-    document.body.appendChild(sectionComparacao);
-
-    // Limpa a lista de voos selecionados após a comparação
-    voosSelecionados = [];
-}
 
 document.getElementById("Buscar").addEventListener("click", function() {
     if (!partidaId || !chegadaId || !document.getElementById("dataDePartida").value) {
         alert("Por favor, selecione os locais de partida e chegada e a data.");
         return;
     }
-    voosExibidos = 5; // Reseta a quantidade de voos exibidos ao clicar em "Buscar"
+    voosExibidos = 8; // Reseta a quantidade de voos exibidos ao clicar em "Buscar"
     buscarVoo();
-});
-
-// Adiciona os eventos de clique aos checkboxes de comparação
-const checkboxes = document.querySelectorAll('input[name="Comparar"]');
-checkboxes.forEach(checkbox => {
-  checkbox.addEventListener('click', () => {
-    const card = checkbox.closest('.card');
-    const cardIndex = Array.from(checkbox.closest('#resultados').children).indexOf(card);
-
-    if (checkbox.checked) {
-      if (voosSelecionados.length < 2) {
-        voosSelecionados.push(cardIndex);
-        document.getElementById('comparador').style.display = 'block';
-      } else {
-        checkbox.checked = false;
-        alert('Você pode comparar apenas 2 voos.');
-      }
-    } else {
-      const index = voosSelecionados.indexOf(cardIndex);
-      if (index > -1) {
-        voosSelecionados.splice(index, 1);
-      }
-    }
-    if (voosSelecionados.length === 0) {
-      document.getElementById('comparador').style.display = 'none';
-    }
-    console.log(voosSelecionados);
-    if (voosSelecionados.length === 2) {
-      compararVoos();
-    }
-  });
 });

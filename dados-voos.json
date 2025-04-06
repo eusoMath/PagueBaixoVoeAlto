@@ -240,6 +240,246 @@
               }
             }
           ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "price": {
+            "formatted": "R$ 460,00",
+            "raw": 460.00
+          },
+          "legs": [
+            {
+              "departure": "2024-07-01T08:00:00",
+              "arrival": "2024-07-01T12:00:00",
+              "durationInMinutes": 240,
+              "carriers": {
+                "marketing": [
+                  {
+                    "name": "Voe Livre"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ]
     }
