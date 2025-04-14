@@ -1,6 +1,17 @@
 let voosExibidosInicial = 8; // Quantidade inicial de voos a exibir
 let todosVoos = []; // Array para armazenar todos os voos carregados
 let voosAtualmenteExibidos = []; // Array para rastrear os voos que já estão na tela
+const caixaDeCompra = document.getElementById('caixaDeCompra');
+const tituloCaixaDeCompra = caixaDeCompra.querySelector('h1'); // Seleciona o título da caixa
+const botaoProsseguirCompra = caixaDeCompra.querySelector('button'); // Seleciona o botão de prosseguir
+const imagemFechar = document.getElementById('fecharCaixaDeCompra'); // Seleciona a imagem de fechar
+
+// Seleciona os novos elementos para exibir as informações
+const precoElement = document.getElementById('preco');
+const partidaElement = document.getElementById('partida');
+const chegadaElement = document.getElementById('chegada');
+const duracaoElement = document.getElementById('duracao');
+const companhiaElement = document.getElementById('companhia');
 
 async function carregarDados() {
     try {
@@ -67,8 +78,18 @@ function exibirResultados(voos) {
         const comprarButton = document.createElement('button');
         comprarButton.textContent = 'Comprar';
         comprarButton.addEventListener('click', () => {
-            console.log('Comprar voo:', itinerary);
-            alert('Funcionalidade de compra em desenvolvimento!');
+            // Atualiza o texto dos elementos existentes com as informações do voo
+            precoElement.textContent = `Preço: ${itinerary.price.formatted}`;
+            partidaElement.textContent = `Partida: ${formattedDepartureDate} às ${formattedDepartureTime}`;
+            chegadaElement.textContent = `Chegada: ${formattedArrivalDate} às ${formattedArrivalTime}`;
+            duracaoElement.textContent = `Duração: ${formattedDuration}`;
+            companhiaElement.textContent = `Companhia Aérea: ${itinerary.legs[0].carriers.marketing[0].name}`;
+
+            // Exibe a caixa de compra com a transição
+            caixaDeCompra.style.display = 'inline';
+            // Forçar um reflow para a transição
+            caixaDeCompra.offsetHeight;
+            caixaDeCompra.style.opacity = '1';
         });
 
         card.appendChild(price);
@@ -99,8 +120,8 @@ function exibirBotaoMostrarMais() {
             document.getElementById("sect1").style.height = "fit-content";
         };
         // Garante que o botão seja adicionado ao DOM se ainda não estiver
-        if (!document.getElementById("sect01").contains(mostrarMaisButton)) {
-            document.getElementById("sect01").appendChild(mostrarMaisButton);
+        if (!document.getElementById("sect1").contains(mostrarMaisButton)) { // Corrigi o ID aqui para "sect1"
+            document.getElementById("sect1").appendChild(mostrarMaisButton);
         }
     } else {
         mostrarMaisButton.style.display = 'none';
@@ -120,12 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarMaisButton.id = 'mostrarMaisButton';
     mostrarMaisButton.textContent = 'Mostrar Mais';
     mostrarMaisButton.style.display = 'none'; // Inicialmente escondido
-    const sect01 = document.getElementById('sect01');
-    if (sect01) {
-        sect01.appendChild(mostrarMaisButton);
+    const sect1 = document.getElementById('sect1'); // Corrigi o ID aqui para "sect1"
+    if (sect1) {
+        sect1.appendChild(mostrarMaisButton);
     } else {
-        console.error("Elemento com ID 'sect01' não encontrado no HTML.");
+        console.error("Elemento com ID 'sect1' não encontrado no HTML.");
     }
 
     carregarDados(); // Carrega os dados iniciais ao carregar a página
 });
+
+document.getElementById('fecharCaixaDeCompra').addEventListener('click', () => {
+    caixaDeCompra.style.display = 'none';
+    caixaDeCompra.style.opacity = '0';
+})

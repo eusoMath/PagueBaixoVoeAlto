@@ -60,7 +60,9 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 65vw;
     gap: 20px;
+    align-self: center;
   }
   
 
@@ -156,4 +158,59 @@
 .caixa-footer:hover {
     filter: invert(10%);
     transition: 300ms;
+}
+
+#caixaDeCompra {
+    position:absolute;
+    border: 5px solid #C2B078;
+    z-index: 3;
+    width: 55vw;
+    height: 65vh;
+    background-color:#EEEEEE;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-shadow: 0px 0px 30px black;
+    /*
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    */
+    padding: 20px;
+}
+
+#caixaDeCompra h1, button {
+    color: #080808;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+#caixaDeCompra button {
+    padding: 5px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#caixaDeCompra p{
+    color: #000000;
+    font-size: 25px;
+}
+
+#companhia {
+    margin-bottom: 120px;
+}
+
+#caixaDeCompra .textoGuia {
+    font-size: 15px;
+    color: gray;
+}
+
+
+#caixaDeCompra img:nth-last-child(1) {
+    position: relative;
+    margin-left: 50%;
+    margin-top: -50%;
+    width: 35%;
 }
