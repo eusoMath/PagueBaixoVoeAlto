@@ -60,7 +60,7 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 65vw;
+    width: 95vw;
     gap: 20px;
     align-self: center;
   }
@@ -173,8 +173,8 @@
     right: 0;
     margin: auto;
     box-shadow: 0px 0px 30px black;
-    /*
     display: none;
+    /*
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     */
@@ -195,22 +195,28 @@
 
 #caixaDeCompra p{
     color: #000000;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #companhia {
-    margin-bottom: 120px;
+    margin-bottom: 3vw;
 }
 
 #caixaDeCompra .textoGuia {
-    font-size: 15px;
+    font-size: 13px;
     color: gray;
 }
 
 
 #caixaDeCompra img:nth-last-child(1) {
-    position: relative;
-    margin-left: 50%;
-    margin-top: -50%;
+    position: absolute;
+    right: 0%;
+    top: 25%;
+    left: 63%;
     width: 35%;
+    opacity: 0;
+}
+
+#fecharCaixaDeCompra {
+    cursor: pointer;
 }

@@ -87,9 +87,11 @@ function exibirResultados(voos) {
 
             // Exibe a caixa de compra com a transição
             caixaDeCompra.style.display = 'inline';
-            // Forçar um reflow para a transição
-            caixaDeCompra.offsetHeight;
             caixaDeCompra.style.opacity = '1';
+            const destino = document.getElementById('header');
+            if (destino) {
+                destino.scrollIntoView({ behavior: 'smooth' });
+            }
         });
 
         card.appendChild(price);
@@ -154,4 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('fecharCaixaDeCompra').addEventListener('click', () => {
     caixaDeCompra.style.display = 'none';
     caixaDeCompra.style.opacity = '0';
+    document.getElementById('qrCode').style.opacity = '0';
+})
+
+document.getElementById('prosseguir').addEventListener('click', () => {
+    document.getElementById('qrCode').style.opacity = '1';
 })
