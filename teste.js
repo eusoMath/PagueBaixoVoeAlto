@@ -5,6 +5,7 @@ const caixaDeCompra = document.getElementById('caixaDeCompra');
 const tituloCaixaDeCompra = caixaDeCompra.querySelector('h1'); // Seleciona o título da caixa
 const botaoProsseguirCompra = caixaDeCompra.querySelector('button'); // Seleciona o botão de prosseguir
 const imagemFechar = document.getElementById('fecharCaixaDeCompra'); // Seleciona a imagem de fechar
+const qrCodeImage = document.getElementById('qrCode'); // Seleciona a imagem do QR code
 
 // Seleciona os novos elementos para exibir as informações
 const precoElement = document.getElementById('preco');
@@ -12,6 +13,10 @@ const partidaElement = document.getElementById('partida');
 const chegadaElement = document.getElementById('chegada');
 const duracaoElement = document.getElementById('duracao');
 const companhiaElement = document.getElementById('companhia');
+
+// Substitua com sua chave de API e ID do mecanismo de pesquisa do Google
+const apiKey = 'AIzaSyBepPSla9-WKKzmbp7sXgxB3dajtrbrlRc';
+const searchEngineId = '61f1a0e3a8cb84fe0';
 
 async function carregarDados() {
     try {
@@ -88,10 +93,15 @@ function exibirResultados(voos) {
             // Exibe a caixa de compra com a transição
             caixaDeCompra.style.display = 'inline';
             caixaDeCompra.style.opacity = '1';
-            const destino = document.getElementById('header');
-            if (destino) {
-                destino.scrollIntoView({ behavior: 'smooth' });
-            }
+            qrCodeImage.style.opacity = '0'; // Garante que o QR code esteja escondido
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Opcional: para uma rolagem suave
+            });
+
+            // Rola para o topo da caixa de compra
+            //caixaDeCompra.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
 
         card.appendChild(price);
@@ -122,7 +132,7 @@ function exibirBotaoMostrarMais() {
             document.getElementById("sect1").style.height = "fit-content";
         };
         // Garante que o botão seja adicionado ao DOM se ainda não estiver
-        if (!document.getElementById("sect1").contains(mostrarMaisButton)) { // Corrigi o ID aqui para "sect1"
+        if (!document.getElementById("sect1").contains(mostrarMaisButton)) {
             document.getElementById("sect1").appendChild(mostrarMaisButton);
         }
     } else {
@@ -143,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarMaisButton.id = 'mostrarMaisButton';
     mostrarMaisButton.textContent = 'Mostrar Mais';
     mostrarMaisButton.style.display = 'none'; // Inicialmente escondido
-    const sect1 = document.getElementById('sect1'); // Corrigi o ID aqui para "sect1"
+    const sect1 = document.getElementById('sect1');
     if (sect1) {
         sect1.appendChild(mostrarMaisButton);
     } else {
@@ -156,9 +166,65 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('fecharCaixaDeCompra').addEventListener('click', () => {
     caixaDeCompra.style.display = 'none';
     caixaDeCompra.style.opacity = '0';
-    document.getElementById('qrCode').style.opacity = '0';
-})
+    qrCodeImage.style.opacity = '0';
+    botaoProsseguirCompra.textContent = 'Prosseguir'; // Reseta o texto do botão
+    botaoProsseguirCompra.removeEventListener('click', mostrarQrCode); // Remove o listener de QR code
+    botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra); // Adiciona o listener de redirecionamento
+});
 
-document.getElementById('prosseguir').addEventListener('click', () => {
-    document.getElementById('qrCode').style.opacity = '1';
-})
+document.getElementById('prosseguir').addEventListener('click', prosseguirParaCompra);
+
+function prosseguirParaCompra() {
+    qrCodeImage.style.opacity = '1';
+    botaoProsseguirCompra.textContent = 'Finalizar Compra';
+    botaoProsseguirCompra.removeEventListener('click', prosseguirParaCompra); // Remove este listener
+    botaoProsseguirCompra.addEventListener('click', finalizarCompra); // Adiciona o listener de finalizar
+}
+
+function finalizarCompra() {
+    const companhia = companhiaElement.textContent.split(': ')[1];
+    buscarLinkCompanhiaAerea(companhia)
+        .then(linkCompra => {
+            if (linkCompra) {
+                window.open(linkCompra, '_blank');
+            } else {
+                alert(`Não foi possível encontrar o site da ${companhia}.`);
+            }
+            caixaDeCompra.style.display = 'none';
+            caixaDeCompra.style.opacity = '0';
+            qrCodeImage.style.opacity = '0';
+            botaoProsseguirCompra.textContent = 'Prosseguir'; // Reseta o texto do botão
+            botaoProsseguirCompra.removeEventListener('click', finalizarCompra); // Remove este listener
+            botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra); // Adiciona o listener de redirecionamento
+        });
+}
+
+function buscarLinkCompanhiaAerea(nomeCompanhia) {
+    if (!apiKey || !searchEngineId) {
+        console.error("Chave de API ou ID do mecanismo de pesquisa do Google não configurados.");
+        return Promise.resolve(null);
+    }
+
+    const query = `${nomeCompanhia}`;
+    const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(query)}`;
+
+    return fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.items && data.items.length > 0) {
+                return data.items[0].link;
+            } else {
+                console.log(`Nenhum site oficial encontrado para ${nomeCompanhia}.`);
+                return null;
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao buscar o site da companhia aérea:", error);
+            return null;
+        });
+}

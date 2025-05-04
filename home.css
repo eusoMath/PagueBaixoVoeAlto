@@ -36,9 +36,14 @@
     align-items: center;
 }
 
+.localDePartida, .localDeChegada, .data, .adultos, .criancas, .bebes, .classe-cabine {
+    display: flex;
+    flex-direction: column;
+}
+
 .container label {
     color: #111111;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 #Buscar {
@@ -73,7 +78,11 @@
     padding: 10px;
     margin: 10px;
     width: 310px;
-    height: 180px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4px;
 }
 
 .container input, select {
@@ -88,13 +97,13 @@
 }
 
 .card h3 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin-bottom: 5px;
     color: #111111;
 }
 
 .card p {
-    font-size: 1em;
+    font-size: 0.9em;
     color: #111111;
 }
 
@@ -105,9 +114,10 @@
     color: #111111;
     background-color: #C2B078;
     height: 35px;
-    padding: 2px 15px;
+    padding: 8px 15px;
     cursor: pointer;
     border-radius: 5px;
+    align-self: flex-start;
 }
 
 .card button:hover {
@@ -188,9 +198,16 @@
 }
 
 #caixaDeCompra button {
-    padding: 5px 20px;
+    padding: 8px 20px;
     font-weight: bold;
     cursor: pointer;
+    background-color: #C2B078;
+    border: none;
+    border-radius: 5px;
+}
+
+#caixaDeCompra button:hover{
+    filter: brightness(95%);
 }
 
 #caixaDeCompra p{
