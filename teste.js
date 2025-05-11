@@ -6,6 +6,7 @@ const tituloCaixaDeCompra = caixaDeCompra.querySelector('h1'); // Seleciona o t�
 const botaoProsseguirCompra = caixaDeCompra.querySelector('button'); // Seleciona o botão de prosseguir
 const imagemFechar = document.getElementById('fecharCaixaDeCompra'); // Seleciona a imagem de fechar
 const qrCodeImage = document.getElementById('qrCode'); // Seleciona a imagem do QR code
+let recaptchaResolvido = false;
 
 // Seleciona os novos elementos para exibir as informações
 const precoElement = document.getElementById('preco');
@@ -93,7 +94,6 @@ function exibirResultados(voos) {
             // Exibe a caixa de compra com a transição
             caixaDeCompra.style.display = 'inline';
             caixaDeCompra.style.opacity = '1';
-            qrCodeImage.style.opacity = '0'; // Garante que o QR code esteja escondido
 
             window.scrollTo({
                 top: 0,
@@ -175,10 +175,24 @@ document.getElementById('fecharCaixaDeCompra').addEventListener('click', () => {
 document.getElementById('prosseguir').addEventListener('click', prosseguirParaCompra);
 
 function prosseguirParaCompra() {
-    qrCodeImage.style.opacity = '1';
-    botaoProsseguirCompra.textContent = 'Finalizar Compra';
-    botaoProsseguirCompra.removeEventListener('click', prosseguirParaCompra); // Remove este listener
-    botaoProsseguirCompra.addEventListener('click', finalizarCompra); // Adiciona o listener de finalizar
+    if (recaptchaResolvido) {
+        // Se o ReCAPTCHA já foi resolvido, podemos prosseguir para a lógica de "Finalizar Compra"
+        qrCodeImage.style.opacity = '1'; // Podemos manter essa linha temporariamente para visualização
+        botaoProsseguirCompra.textContent = 'Finalizar Compra';
+        botaoProsseguirCompra.removeEventListener('click', prosseguirParaCompra);
+        botaoProsseguirCompra.addEventListener('click', finalizarCompra);
+    } else {
+        alert('Por favor, complete a verificação ReCAPTCHA.');
+        // Opcional: Você pode adicionar alguma indicação visual para o usuário completar o ReCAPTCHA
+    }
+}
+
+function onRecaptchaSuccess(token) {
+    console.log('ReCAPTCHA resolvido:', token);
+    recaptchaResolvido = true;
+    botaoProsseguirCompra.textContent = 'Prosseguir para Finalizar';
+    botaoProsseguirCompra.removeEventListener('click', prosseguirParaCompra); // Remove o listener antigo
+    botaoProsseguirCompra.addEventListener('click', finalizarCompra); // Adiciona o novo listener
 }
 
 function finalizarCompra() {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
@@ -16,10 +17,10 @@
       <p id="duracao"></p>
       <p id="companhia"></p>
       <p class="textoGuia">
-        Clique em prosseguir para gerar o QR code.
+        Faça a verificação para prosseguir ao site da companhia aérea.
       </p>
+      <div class="g-recaptcha" data-sitekey="6Lei-zUrAAAAAMkrUl4hhNj9H7V1PLYJwt88CFUo" data-callback="onRecaptchaSuccess"></div>
       <button id="prosseguir">Prosseguir</button>
-      <img src="./assets/QR code.png" alt="QR CODE" id="qrCode">
   </div>
   <div class="container" id="header">
       <!--

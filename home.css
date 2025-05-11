@@ -175,7 +175,7 @@
     border: 5px solid #C2B078;
     z-index: 3;
     width: 55vw;
-    height: 65vh;
+    height: fit-content;
     background-color:#EEEEEE;
     top: 0;
     bottom: 0;
@@ -191,7 +191,7 @@
     padding: 20px;
 }
 
-#caixaDeCompra h1, button {
+#caixaDeCompra h1 {
     color: #080808;
     margin-top: 20px;
     margin-bottom: 60px;
@@ -204,6 +204,7 @@
     background-color: #C2B078;
     border: none;
     border-radius: 5px;
+    margin-top: 5px
 }
 
 #caixaDeCompra button:hover{
@@ -224,16 +225,10 @@
     color: gray;
 }
 
-
-#caixaDeCompra img:nth-last-child(1) {
-    position: absolute;
-    right: 0%;
-    top: 25%;
-    left: 63%;
-    width: 35%;
-    opacity: 0;
-}
-
 #fecharCaixaDeCompra {
     cursor: pointer;
+}
+
+.g-recaptcha {
+    margin-top: 5px;
 }
