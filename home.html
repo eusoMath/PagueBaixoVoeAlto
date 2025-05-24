@@ -1,190 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
-    <title>Document</title>
+    <title>Voe Alto - Página Inicial</title>
 </head>
 <body id="inicioDaPagina">
-  <div id="caixaDeCompra" class="caixaDeCompra">
-      <img src="./assets/Logos/close-svgrepo-com.svg" alt="Fechar" id="fecharCaixaDeCompra" width="25px">
-      <h1>Você deseja continuar sua compra?</h1>
-      <p id="preco"></p>
-      <p id="partida"></p>
-      <p id="chegada"></p>
-      <p id="duracao"></p>
-      <p id="companhia"></p>
-      <p class="textoGuia">
-        Faça a verificação para prosseguir ao site da companhia aérea.
-      </p>
-      <div class="g-recaptcha" data-sitekey="6Lei-zUrAAAAAMkrUl4hhNj9H7V1PLYJwt88CFUo" data-callback="onRecaptchaSuccess"></div>
-      <button id="prosseguir">Prosseguir</button>
-  </div>
-  <div class="container" id="header">
-      <!--
-      <h1>Bem-vindo à Página Inicial!</h1>
-      <p id="nomeUsuario"></p>
-      -->
-      <div class="localDePartida">
-          <label for="localPartidaInput">De:</label>
-          <input type="text" placeholder="Local de Partida" id="localPartidaInput" list="sugestoesPartida" autocomplete="off">
-          <datalist id="sugestoesPartida"></datalist>
-          <input type="hidden" id="idPartidaHidden">
-      </div>
-      <div class="localDeChegada">
-          <label for="localChegadaInput">Para:</label>
-          <input type="text" id="localChegadaInput" placeholder="Local de Chegada" list="sugestoesChegada" autocomplete="off">
-          <datalist id="sugestoesChegada"></datalist>
-          <input type="hidden" id="idChegadaHidden">
-      </div>
-      <div class="data">
-          <label for="dataDePartida">Data:</label>
-          <input type="date" id="dataDePartida">
-      </div>
-      <div class="adultos">
-          <label for="adultos">Adultos:</label>
-          <input type="number" id="adultos" placeholder="Adultos" value="1">
-      </div>
-      <div class="criancas">
-          <label for="criancas">Crianças:</label>
-          <input type="number" id="criancas" placeholder="Crianças" value="0">
-      </div>
-      <div class="bebes">
-          <label for="bebes">Bebês:</label>
-          <input type="number" id="bebes" placeholder="Bebês" value="0">
-      </div>
-      <div class="classe-cabine">
-          <label for="classeCabine">Classe da Cabine:</label>
-          <select id="classeCabine">
-              <option value="economy">Econômica</option>
-              <option value="premium_economy">Econômica Premium</option>
-              <option value="business">Executiva</option>
-              <option value="first">Primeira Classe</option>
-          </select>
-      </div>
-      <input type="button" value="buscar" id="Buscar">
-  </div>
-  <div class="divisor"></div>
+    <div id="caixaDeCompra" class="caixaDeCompra">
+        <img src="./assets/Logos/close-svgrepo-com.svg" alt="Fechar" id="fecharCaixaDeCompra" width="25px">
+        <h1>Você deseja continuar sua compra?</h1>
+        <p id="preco"></p>
+        <p id="partida"></p>
+        <p id="chegada"></p>
+        <p id="duracao"></p>
+        <p id="companhia"></p>
+        <img id="qrCode" src="./assets/QR code.png" alt="QR Code" style="width: 150px; height: 150px; margin: 20px auto; display: block; opacity: 0; transition: opacity 0.5s ease-in-out;">
+        <p class="textoGuia">
+            Faça a verificação para prosseguir ao site da companhia aérea.
+        </p>
+        <div class="g-recaptcha" data-sitekey="6Lei-zUrAAAAAMkrUl4hhNj9H7V1PLYJwt88CFUo" data-callback="onRecaptchaSuccess"></div>
+        <button id="prosseguir">Prosseguir</button>
+    </div>
+    <div class="container" id="header">
+        <h1>Bem-vindo à Página Inicial!</h1>
+        <p id="nomeUsuario"></p>
+        <div class="localDePartida">
+            <label for="localPartidaInput">De:</label>
+            <input type="text" placeholder="Local de Partida" id="localPartidaInput" list="sugestoesPartida" autocomplete="off">
+            <datalist id="sugestoesPartida"></datalist>
+            <input type="hidden" id="idPartidaHidden">
+        </div>
+        <div class="localDeChegada">
+            <label for="localChegadaInput">Para:</label>
+            <input type="text" id="localChegadaInput" placeholder="Local de Chegada" list="sugestoesChegada" autocomplete="off">
+            <datalist id="sugestoesChegada"></datalist>
+            <input type="hidden" id="idChegadaHidden">
+        </div>
+        <div class="data">
+            <label for="dataDePartida">Data:</label>
+            <input type="date" id="dataDePartida">
+        </div>
+        <div class="adultos">
+            <label for="adultos">Adultos:</label>
+            <input type="number" id="adultos" placeholder="Adultos" value="1">
+        </div>
+        <div class="criancas">
+            <label for="criancas">Crianças:</label>
+            <input type="number" id="criancas" placeholder="Crianças" value="0">
+        </div>
+        <div class="bebes">
+            <label for="bebes">Bebês:</label>
+            <input type="number" id="bebes" placeholder="Bebês" value="0">
+        </div>
+        <div class="classe-cabine">
+            <label for="classeCabine">Classe da Cabine:</label>
+            <select id="classeCabine">
+                <option value="economy">Econômica</option>
+                <option value="premium_economy">Econômica Premium</option>
+                <option value="business">Executiva</option>
+                <option value="first">Primeira Classe</option>
+            </select>
+        </div>
+        <input type="button" value="buscar" id="Buscar">
+    </div>
+    <div class="divisor"></div>
     <section class="sect-1" id="sect1">
         <div id="resultados"></div>
-        <!--
-        <div id="resultados">
-            <div class="card">
-              <h3>Preço: R$ 350,00</h3>
-              <p>Partida: 20/06/2024 - 10:00</p>
-              <p>Chegada: 20/06/2024 - 14:30</p>
-              <p>Duração: 4h 30m</p>
-              <p>Companhia Aérea: Exemplo Airlines</p>
-              <button>Comprar</button>
-            </div>
-            <div class="card">
-              <h3>Preço: R$ 420,00</h3>
-              <p>Partida: 21/06/2024 - 08:00</p>
-              <p>Chegada: 21/06/2024 - 12:15</p>
-              <p>Duração: 4h 15m</p>
-              <p>Companhia Aérea: Outra Companhia</p>
-              <button>Comprar</button>
-            </div>
-              <div class="card">
-              <h3>Preço: R$ 200,00</h3>
-              <p>Partida: 20/06/2024 - 10:00</p>
-              <p>Chegada: 20/06/2024 - 14:30</p>
-              <p>Duração: 4h 30m</p>
-              <p>Companhia Aérea: Exemplo Airlines</p>
-              <button>Comprar</button>
-            </div>
-            <div class="card">
-              <h3>Preço: R$ 600,00</h3>
-              <p>Partida: 21/06/2024 - 08:00</p>
-              <p>Chegada: 21/06/2024 - 12:15</p>
-              <p>Duração: 4h 15m</p>
-              <p>Companhia Aérea: Outra Companhia</p>
-              <button>Comprar</button>
-            </div>
-              <div class="card">
-              <h3>Preço: R$ 100,00</h3>
-              <p>Partida: 20/06/2024 - 10:00</p>
-              <p>Chegada: 20/06/2024 - 14:30</p>
-              <p>Duração: 4h 30m</p>
-              <p>Companhia Aérea: Exemplo Airlines</p>
-              <button>Comprar</button>
-            </div>
-            <div class="card">
-              <h3>Preço: R$ 800,00</h3>
-              <p>Partida: 21/06/2024 - 08:00</p>
-              <p>Chegada: 21/06/2024 - 12:15</p>
-              <p>Duração: 4h 15m</p>
-              <p>Companhia Aérea: Outra Companhia</p>
-              <button>Comprar</button>
-            </div>
-            <div class="card">
-                <h3>Preço: R$ 800,00</h3>
-                <p>Partida: 21/06/2024 - 08:00</p>
-                <p>Chegada: 21/06/2024 - 12:15</p>
-                <p>Duração: 4h 15m</p>
-                <p>Companhia Aérea: Outra Companhia</p>
-                <button>Comprar</button>
-              </div>
-            <div class="card">
-              <h3>Preço: R$ 800,00</h3>
-              <p>Partida: 21/06/2024 - 08:00</p>
-              <p>Chegada: 21/06/2024 - 12:15</p>
-              <p>Duração: 4h 15m</p>
-              <p>Companhia Aérea: Outra Companhia</p>
-              <button>Comprar</button>
-            </div>
-            <div class="card">
-                <h3>Preço: R$ 800,00</h3>
-                <p>Partida: 21/06/2024 - 08:00</p>
-                <p>Chegada: 21/06/2024 - 12:15</p>
-                <p>Duração: 4h 15m</p>
-                <p>Companhia Aérea: Outra Companhia</p>
-                <button>Comprar</button>
-              </div>
-              <div class="card">
-                <h3>Preço: R$ 800,00</h3>
-                <p>Partida: 21/06/2024 - 08:00</p>
-                <p>Chegada: 21/06/2024 - 12:15</p>
-                <p>Duração: 4h 15m</p>
-                <p>Companhia Aérea: Outra Companhia</p>
-                <button>Comprar</button>
-              </div>
-        </div>
-        -->
-          <button id="mostrarMaisButton" style="display: none;">Mostrar Mais</button>
+        <button id="mostrarMaisButton" style="display: none;">Mostrar Mais</button>
     </section>
     <div class="divisor"></div>
     <section id="contact">
-      <a href="https://github.com/eusoMath/" target="_blank">
-          <div class="caixa-footer">
-              <img width="50px" src="./assets/Logos/github.svg" alt="logo github">
-              <p>GitHub</p>
-          </div>
-      </a>
-      <a href="https://instagram.com/eusomath" target="_blank">
-          <div class="caixa-footer">
-              <img width="50px" src="./assets/Logos/linkedin.svg" alt="logo linkedin">
-              <p>Linkedin</p>
-          </div>
-      </a>
-      <a href="https://www.linkedin.com/in/eusomath/" target="_blank">
-          <div class="caixa-footer">
-              <img width="50px" src="./assets/Logos/instagram.svg" alt="logo Instagram">
-              <p>Instagram</p>
-          </div>
-      </a>
-  </section>
+        <a href="https://github.com/eusoMath/" target="_blank">
+            <div class="caixa-footer">
+                <img width="50px" src="./assets/Logos/github.svg" alt="logo github">
+                <p>GitHub</p>
+            </div>
+        </a>
+        <a href="https://instagram.com/eusomath" target="_blank">
+            <div class="caixa-footer">
+                <img width="50px" src="./assets/Logos/linkedin.svg" alt="logo linkedin">
+                <p>Linkedin</p>
+            </div>
+        </a>
+        <a href="https://www.linkedin.com/in/eusomath/" target="_blank">
+            <div class="caixa-footer">
+                <img width="50px" src="./assets/Logos/instagram.svg" alt="logo Instagram">
+                <p>Instagram</p>
+            </div>
+        </a>
+    </section>
 
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-database-compat.js"></script>
+
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="teste.js"></script>
 </body>
-<script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-database-compat.js"></script>
-<!--
-  <script type="module" src="/buscar.js"></script>
-  <script type="module" src="/autocomplete.js"></script>
-  -->
-
-<script src="/teste.js"></script>
 </html>

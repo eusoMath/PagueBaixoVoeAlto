@@ -78,7 +78,7 @@
     padding: 10px;
     margin: 10px;
     width: 310px;
-    height: 200px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -103,7 +103,7 @@
 }
 
 .card p {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #111111;
 }
 
@@ -231,4 +231,25 @@
 
 .g-recaptcha {
     margin-top: 5px;
+}
+
+.card .favoritar-btn {
+    align-self: flex-end; /* Alinha o botão ao canto superior direito ou inferior, ajuste conforme preferir */
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 25px; /* Tamanho do ícone, ajuste conforme necessário */
+    color: #C2B078; /* Cor do ícone, ajuste para algo que se destaque */
+    padding: 5px;
+    margin-top: -10px;
+    transition: color 0.2s ease-in-out;
+}
+
+.card .favoritar-btn:hover {
+    color: #a09060; /* Cor ao passar o mouse */
+}
+
+/* Estilo para o ícone de favoritado */
+.card .favoritar-btn.favorited {
+    color: #FF6347; /* Cor do coração preenchido (ex: vermelho) */
 }

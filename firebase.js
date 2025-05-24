@@ -23,5 +23,37 @@ function lerDataUsuario(userId) {
    });
 }
 
+function adicionarVooFavorito(userId, flightId, flightData) {
+    return database.ref('users/' + userId + '/favoritedFlights/' + flightId).set(flightData)
+        .then(() => {
+            console.log(`Voo ${flightId} adicionado aos favoritos do usuário ${userId}.`);
+        })
+        .catch(error => {
+            console.error("Erro ao adicionar voo favorito:", error);
+            throw error; // Propagar o erro para quem chamou
+        });
+}
 
-export {database, escreverDataUsuario, lerDataUsuario, firebaseConfig};
+function removerVooFavorito(userId, flightId) {
+    return database.ref('users/' + userId + '/favoritedFlights/' + flightId).remove()
+        .then(() => {
+            console.log(`Voo ${flightId} removido dos favoritos do usuário ${userId}.`);
+        })
+        .catch(error => {
+            console.error("Erro ao remover voo favorito:", error);
+            throw error;
+        });
+}
+
+async function verificarVooFavorito(userId, flightId) {
+    try {
+        const snapshot = await database.ref('users/' + userId + '/favoritedFlights/' + flightId).once('value');
+        return snapshot.exists(); // Retorna true se o voo existe nos favoritos, false caso contrário
+    } catch (error) {
+        console.error("Erro ao verificar voo favorito:", error);
+        return false;
+    }
+}
+
+// Exportar as novas funções
+export { database, escreverDataUsuario, lerDataUsuario, adicionarVooFavorito, removerVooFavorito, verificarVooFavorito, firebaseConfig };
