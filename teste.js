@@ -1,39 +1,31 @@
-import { escreverDataUsuario, lerDataUsuario, adicionarVooFavorito, removerVooFavorito, verificarVooFavorito } from './firebase.js';
+import { auth, escreverDataUsuario, lerDataUsuario, adicionarVooFavorito, removerVooFavorito, verificarVooFavorito } from './firebase.js';
 
-let voosExibidosInicial = 8; // Quantidade inicial de voos a exibir
-let todosVoos = []; // Array para armazenar todos os voos carregados
-let voosAtualmenteExibidos = []; // Array para rastrear os voos que já estão na tela
+let voosExibidosInicial = 8;
+let todosVoos = [];
+let voosAtualmenteExibidos = [];
 const caixaDeCompra = document.getElementById('caixaDeCompra');
-const tituloCaixaDeCompra = caixaDeCompra.querySelector('h1'); // Seleciona o título da caixa
-const botaoProsseguirCompra = caixaDeCompra.querySelector('button'); // Seleciona o botão de prosseguir
-const imagemFechar = document.getElementById('fecharCaixaDeCompra'); // Seleciona a imagem de fechar
-const qrCodeImage = document.getElementById('qrCode'); // Seleciona a imagem do QR code
+const tituloCaixaDeCompra = caixaDeCompra.querySelector('h1');
+const botaoProsseguirCompra = caixaDeCompra.querySelector('button');
+const imagemFechar = document.getElementById('fecharCaixaDeCompra');
 let recaptchaResolvido = false;
 
-// Seleciona os novos elementos para exibir as informações
 const precoElement = document.getElementById('preco');
 const partidaElement = document.getElementById('partida');
 const chegadaElement = document.getElementById('chegada');
 const duracaoElement = document.getElementById('duracao');
 const companhiaElement = document.getElementById('companhia');
 
-// Substitua com sua chave de API e ID do mecanismo de pesquisa do Google
-// ATENÇÃO: Em produção, estas chaves devem ser gerenciadas com mais segurança (ex: backend)
 const apiKey = 'AIzaSyBepPSla9-WKKzmbp7sXgxB3dajtrbrlRc';
 const searchEngineId = '61f1a0e3a8cb84fe0';
 
-
-// Função para gerar um ID único para o voo
 function generateFlightId(voo) {
-    // Combine propriedades que tornem o voo razoavelmente único
     const idString = `${voo.legs[0].departure}-${voo.legs[0].arrival}-${voo.legs[0].carriers.marketing[0].name}-${voo.price.raw}`;
-    // Crie um hash simples usando btoa para codificar
-    return btoa(idString).replace(/=/g, ''); // Remove '=' para um ID mais limpo
+    return btoa(idString).replace(/=/g, '');
 }
 
 async function carregarVoosLocais() {
     try {
-        const response = await fetch('./dados-voos.json'); // Caminho para o seu arquivo JSON
+        const response = await fetch('./dados-voos.json');
         if (!response.ok) {
             throw new Error(`Erro ao carregar dados locais: ${response.status}`);
         }
@@ -50,9 +42,7 @@ async function carregarDados() {
         const dados = await carregarVoosLocais();
         if (dados && dados.data && dados.data.itineraries) {
             todosVoos = dados.data.itineraries;
-            // Limpa os resultados anteriores antes de exibir novos
             document.getElementById('resultados').innerHTML = '';
-            // Exibe a quantidade inicial de voos
             exibirProximosVoos(voosExibidosInicial);
         } else {
             console.warn("Nenhum dado de voo encontrado ou estrutura inválida.");
@@ -74,16 +64,14 @@ function exibirResultados(voos) {
         const card = document.createElement('div');
         card.classList.add('card');
 
-        // Botão/Ícone de Favoritar
         const favoritarButton = document.createElement('button');
         favoritarButton.classList.add('favoritar-btn');
-        favoritarButton.innerHTML = '&#9733;'; // Ícone de estrela vazia (pode ser SVG ou outro ícone)
-        favoritarButton.dataset.voo = JSON.stringify(itinerary); // Armazena os dados do voo no botão
+        favoritarButton.innerHTML = '&#9733;';
+        favoritarButton.dataset.voo = JSON.stringify(itinerary);
 
         favoritarButton.addEventListener('click', async (event) => {
-            const clickedButton = event.currentTarget; // O botão que foi clicado
-
-            const user = firebase.auth().currentUser;
+            const clickedButton = event.currentTarget;
+            const user = auth.currentUser;
             if (!user) {
                 alert('Você precisa estar logado para favoritar voos!');
                 return;
@@ -95,18 +83,21 @@ function exibirResultados(voos) {
 
             const isFavorited = clickedButton.classList.contains('favorited');
 
-            if (isFavorited) {
-                // Remover dos favoritos
-                await removerVooFavorito(userId, vooId);
-                clickedButton.classList.remove('favorited');
-                clickedButton.innerHTML = '&#9733;'; // Coração vazio
-                alert('Voo removido dos favoritos!');
-            } else {
-                // Adicionar aos favoritos
-                await adicionarVooFavorito(userId, vooId, vooParaFavoritar);
-                clickedButton.classList.add('favorited');
-                clickedButton.innerHTML = '&#9733;'; // Coração cheio
-                alert('Voo adicionado aos favoritos!');
+            try {
+                if (isFavorited) {
+                    await removerVooFavorito(userId, vooId);
+                    clickedButton.classList.remove('favorited');
+                    clickedButton.innerHTML = '&#9733;';
+                    alert('Voo removido dos favoritos!');
+                } else {
+                    await adicionarVooFavorito(userId, vooId, vooParaFavoritar);
+                    clickedButton.classList.add('favorited');
+                    clickedButton.innerHTML = '&#9733;';
+                    alert('Voo adicionado aos favoritos!');
+                }
+            } catch (error) {
+                console.error("Erro ao favoritar/desfavoritar voo:", error);
+                alert("Ocorreu um erro ao atualizar seus favoritos. Por favor, tente novamente.");
             }
         });
 
@@ -147,31 +138,27 @@ function exibirResultados(voos) {
         const comprarButton = document.createElement('button');
         comprarButton.textContent = 'Comprar';
         comprarButton.addEventListener('click', () => {
-            // Atualiza o texto dos elementos existentes com as informações do voo
             precoElement.textContent = `Preço: ${itinerary.price.formatted}`;
             partidaElement.textContent = `Partida: ${formattedDepartureDate} às ${formattedDepartureTime}`;
             chegadaElement.textContent = `Chegada: ${formattedArrivalDate} às ${formattedArrivalTime}`;
             duracaoElement.textContent = `Duração: ${formattedDuration}`;
             companhiaElement.textContent = `Companhia Aérea: ${itinerary.legs[0].carriers.marketing[0].name}`;
 
-            // Exibe a caixa de compra com a transição
             caixaDeCompra.style.display = 'inline';
             caixaDeCompra.style.opacity = '1';
 
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth' // Opcional: para uma rolagem suave
+                behavior: 'smooth'
             });
 
-            // Garante que o botão de prosseguir esteja no estado correto (antes do reCAPTCHA)
             botaoProsseguirCompra.textContent = 'Prosseguir';
-            // Remove e adiciona listeners para evitar múltiplos eventos
             botaoProsseguirCompra.removeEventListener('click', finalizarCompra);
             botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra);
-            recaptchaResolvido = false; // Reseta o estado do reCAPTCHA
+            recaptchaResolvido = true;
         });
 
-        card.appendChild(favoritarButton); // Adicione o botão de favoritar
+        card.appendChild(favoritarButton);
         card.appendChild(price);
         card.appendChild(departure);
         card.appendChild(arrival);
@@ -181,15 +168,24 @@ function exibirResultados(voos) {
 
         resultadosDiv.appendChild(card);
 
-        // Verifica o estado de favorito do voo após o usuário estar logado
-        firebase.auth().onAuthStateChanged(async (user) => {
+        auth.onAuthStateChanged(async (user) => {
             if (user) {
                 const vooId = generateFlightId(itinerary);
-                const favorito = await verificarVooFavorito(user.uid, vooId);
-                if (favorito) {
-                    favoritarButton.classList.add('favorited');
-                    favoritarButton.innerHTML = '&#9733;'; // Ícone de estrela preenchida
+                try {
+                    const favorito = await verificarVooFavorito(user.uid, vooId);
+                    if (favorito) {
+                        favoritarButton.classList.add('favorited');
+                        favoritarButton.innerHTML = '&#9733;';
+                    } else {
+                        favoritarButton.classList.remove('favorited');
+                        favoritarButton.innerHTML = '&#9733;';
+                    }
+                } catch (error) {
+                    console.error("Erro ao verificar status de favorito do voo:", error);
                 }
+            } else {
+                favoritarButton.classList.remove('favorited');
+                favoritarButton.innerHTML = '&#9733;';
             }
         });
     });
@@ -211,7 +207,6 @@ function exibirBotaoMostrarMais() {
             exibirProximosVoos();
             document.getElementById("sect1").style.height = "fit-content";
         };
-        // Garante que o botão seja adicionado ao DOM se ainda não estiver
         if (!document.getElementById("sect1").contains(mostrarMaisButton)) {
             document.getElementById("sect1").appendChild(mostrarMaisButton);
         }
@@ -221,8 +216,7 @@ function exibirBotaoMostrarMais() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Listener para exibir o nome do usuário logado
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
         const nomeUsuarioElement = document.getElementById('nomeUsuario');
         if (nomeUsuarioElement) {
             if (user) {
@@ -230,39 +224,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (nomeExibicao) {
                     nomeUsuarioElement.textContent = `Bem-vindo(a), ${nomeExibicao}!`;
                 } else {
-                    // Tenta ler do Realtime Database se displayName não estiver disponível
-                    lerDataUsuario(user.uid)
-                        .then(username => {
-                            if (username) {
-                                nomeUsuarioElement.textContent = `Bem-vindo(a), ${username}!`;
-                            } else {
-                                nomeUsuarioElement.textContent = `Bem-vindo(a), ${user.email}!`;
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Erro ao ler nome do usuário do banco de dados:", error);
+                    try {
+                        const username = await lerDataUsuario(user.uid);
+                        if (username) {
+                            nomeUsuarioElement.textContent = `Bem-vindo(a), ${username}!`;
+                        } else {
                             nomeUsuarioElement.textContent = `Bem-vindo(a), ${user.email}!`;
-                        });
+                        }
+                    } catch (error) {
+                        console.error("Erro ao ler nome do usuário do banco de dados:", error);
+                        nomeUsuarioElement.textContent = `Bem-vindo(a), ${user.email}!`;
+                    }
                 }
             } else {
-                // Se não houver usuário logado, redireciona para a página de login
                 window.location.href = "index.html";
             }
         }
     });
 
     document.getElementById('Buscar').addEventListener('click', () => {
-        voosExibidosInicial = 8; // Reseta a quantidade inicial ao clicar em "Buscar"
-        voosAtualmenteExibidos = []; // Limpa os voos exibidos
-        document.getElementById('resultados').innerHTML = ''; // Limpa a tela antes de nova busca
+        voosExibidosInicial = 8;
+        voosAtualmenteExibidos = [];
+        document.getElementById('resultados').innerHTML = '';
         carregarDados();
     });
 
-    // Garante que o botão "Mostrar Mais" exista no HTML com o ID correto
     const mostrarMaisButton = document.createElement('button');
     mostrarMaisButton.id = 'mostrarMaisButton';
     mostrarMaisButton.textContent = 'Mostrar Mais';
-    mostrarMaisButton.style.display = 'none'; // Inicialmente escondido
+    mostrarMaisButton.style.display = 'none';
     const sect1 = document.getElementById('sect1');
     if (sect1) {
         sect1.appendChild(mostrarMaisButton);
@@ -270,45 +260,39 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Elemento com ID 'sect1' não encontrado no HTML.");
     }
 
-    carregarDados(); // Carrega os dados iniciais ao carregar a página
+    carregarDados();
 });
 
 document.getElementById('fecharCaixaDeCompra').addEventListener('click', () => {
     caixaDeCompra.style.display = 'none';
     caixaDeCompra.style.opacity = '0';
-    qrCodeImage.style.opacity = '0';
-    botaoProsseguirCompra.textContent = 'Prosseguir'; // Reseta o texto do botão
-    // Remove o listener de finalizarCompra e adiciona o de prosseguirParaCompra
+    botaoProsseguirCompra.textContent = 'Prosseguir';
     botaoProsseguirCompra.removeEventListener('click', finalizarCompra);
     botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra);
-    recaptchaResolvido = false; // Reseta o estado do reCAPTCHA
+    recaptchaResolvido = true;
 });
 
-// A função prosseguirParaCompra é agora o listener inicial para o botão "prosseguir"
-document.getElementById('prosseguir').addEventListener('click', prosseguirParaCompra);
+const prosseguirBtn = document.getElementById('prosseguir');
+if (prosseguirBtn) {
+    prosseguirBtn.addEventListener('click', prosseguirParaCompra);
+} else {
+    console.error("Botão com ID 'prosseguir' não encontrado.");
+}
 
 function prosseguirParaCompra() {
     if (recaptchaResolvido) {
-        // Se o ReCAPTCHA já foi resolvido, podemos prosseguir para a lógica de "Finalizar Compra"
-        qrCodeImage.style.opacity = '1'; // Exibe o QR Code
         botaoProsseguirCompra.textContent = 'Finalizar Compra';
         botaoProsseguirCompra.removeEventListener('click', prosseguirParaCompra);
         botaoProsseguirCompra.addEventListener('click', finalizarCompra);
     } else {
         alert('Por favor, complete a verificação ReCAPTCHA.');
-        // Opcional: Você pode adicionar alguma indicação visual para o usuário completar o ReCAPTCHA
     }
 }
 
-// Global function para o reCAPTCHA callback (precisa ser global)
 window.onRecaptchaSuccess = function(token) {
     console.log('ReCAPTCHA resolvido:', token);
     recaptchaResolvido = true;
-    // O texto do botão já é "Prosseguir" antes do reCAPTCHA, e a função prosseguirParaCompra
-    // já lida com a mudança para "Finalizar Compra" se o reCAPTCHA for resolvido.
-    // Não é necessário mudar o texto aqui, a menos que queira um feedback imediato diferente.
 };
-
 
 function finalizarCompra() {
     const companhia = companhiaElement.textContent.split(': ')[1];
@@ -319,14 +303,22 @@ function finalizarCompra() {
             } else {
                 alert(`Não foi possível encontrar o site da ${companhia}.`);
             }
-            // Resetar o estado da caixa de compra após finalizar
             caixaDeCompra.style.display = 'none';
             caixaDeCompra.style.opacity = '0';
-            qrCodeImage.style.opacity = '0';
-            botaoProsseguirCompra.textContent = 'Prosseguir'; // Reseta o texto do botão
+            botaoProsseguirCompra.textContent = 'Prosseguir';
             botaoProsseguirCompra.removeEventListener('click', finalizarCompra);
             botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra);
-            recaptchaResolvido = false; // Reseta o estado do reCAPTCHA
+            recaptchaResolvido = true;
+        })
+        .catch(error => {
+            console.error("Erro ao finalizar compra e buscar link:", error);
+            alert("Ocorreu um erro ao tentar finalizar a compra. Por favor, tente novamente.");
+            caixaDeCompra.style.display = 'none';
+            caixaDeCompra.style.opacity = '0';
+            botaoProsseguirCompra.textContent = 'Prosseguir';
+            botaoProsseguirCompra.removeEventListener('click', finalizarCompra);
+            botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra);
+            recaptchaResolvido = true;
         });
 }
 
@@ -336,25 +328,30 @@ function buscarLinkCompanhiaAerea(nomeCompanhia) {
         return Promise.resolve(null);
     }
 
-    const query = `${nomeCompanhia} site oficial`; // Adicionado "site oficial" para resultados mais precisos
+    const query = `${nomeCompanhia} site oficial`;
     const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(query)}`;
 
     return fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Erro na requisição da API de busca: ${response.status}`);
+                return response.json().then(err => {
+                    throw new Error(`Erro na requisição da API de busca: ${response.status} - ${err.error?.message || response.statusText}`);
+                }).catch(() => {
+                    throw new Error(`Erro na requisição da API de busca: ${response.status} - ${response.statusText}`);
+                });
             }
             return response.json();
         })
         .then(data => {
             if (data.items && data.items.length > 0) {
-                // Tenta encontrar um link que pareça mais oficial
                 const officialLink = data.items.find(item => {
                     const url = item.link.toLowerCase();
-                    return url.includes(nomeCompanhia.toLowerCase().replace(/ linhas aéreas| airlines brasil/g, '').replace(/\s/g, '')) &&
-                           !url.includes('wikipedia') && !url.includes('melhoresdestinos'); // Filtros básicos
+                    return url.includes(nomeCompanhia.toLowerCase().replace(/ linhas aéreas| airlines brasil| /g, '')) &&
+                           !url.includes('wikipedia') &&
+                           !url.includes('melhoresdestinos') &&
+                           !url.includes('reclameaqui');
                 });
-                return officialLink ? officialLink.link : data.items[0].link; // Retorna o mais oficial ou o primeiro
+                return officialLink ? officialLink.link : data.items[0].link;
             } else {
                 console.log(`Nenhum site oficial encontrado para ${nomeCompanhia}.`);
                 return null;

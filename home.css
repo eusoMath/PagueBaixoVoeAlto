@@ -97,6 +97,7 @@
 }
 
 .card h3 {
+    margin-top: -25px;
     font-size: 1.1em;
     margin-bottom: 5px;
     color: #111111;
@@ -234,12 +235,12 @@
 }
 
 .card .favoritar-btn {
-    align-self: flex-end; /* Alinha o botão ao canto superior direito ou inferior, ajuste conforme preferir */
+    align-self: flex-end;
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 25px; /* Tamanho do ícone, ajuste conforme necessário */
-    color: #C2B078; /* Cor do ícone, ajuste para algo que se destaque */
+    font-size: 25px;
+    color: #C2B078; 
     padding: 5px;
     margin-top: -10px;
     transition: color 0.2s ease-in-out;
