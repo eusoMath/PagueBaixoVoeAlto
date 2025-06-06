@@ -1,0 +1,12 @@
+body{
+    background-color: #EEEEEE;
+}
+
+.resultados {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-self: center;
+  padding: 20px 0;
+  height: fit-content;
+}

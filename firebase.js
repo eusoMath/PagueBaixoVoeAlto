@@ -95,12 +95,21 @@ async function verificarVooFavorito(userId, flightId) {
     }
 }
 
-export {
-  auth,
-  database,
-  escreverDataUsuario,
-  lerDataUsuario,
-  adicionarVooFavorito,
-  removerVooFavorito,
-  verificarVooFavorito
-};
+async function lerTodosOsFavoritos(userId) {
+    if (!userId) {
+        console.error("lerTodosOsFavoritos: userId é nulo ou indefinido. Retornando array vazio.");
+        return [];
+    }
+    try {
+        const snapshot = await database.ref('users/' + userId + '/favoritedFlights').once('value');
+        if (snapshot.exists()) {
+            const dados = snapshot.val();
+            return Object.values(dados);
+        } else {
+            return [];
+        }
+    } catch (error) {
+        console.error("Erro ao ler todos os voos favoritos:", error);
+        throw error;
+    }
+}

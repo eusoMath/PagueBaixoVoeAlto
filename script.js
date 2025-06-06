@@ -1,5 +1,3 @@
-import { escreverDataUsuario, lerDataUsuario } from './firebase.js';
-
 const botao = document.getElementById("mudar");
 var numero = 1;
 
@@ -127,19 +125,18 @@ function loginTwitter() {
         });
 }
 
-//Listeners
 document.getElementById("mudar").addEventListener("click", () => {
     agregar();
     visualizar();
 });
 
 document.getElementById("EntrarLogin").addEventListener("click", (event) => {
-    event.preventDefault(); // Evita o envio do formulário
+    event.preventDefault();
     loginUsuario();
 });
 
 document.getElementById("EntrarRegister").addEventListener("click", (event) => {
-    event.preventDefault(); // Evita o envio do formulário
+    event.preventDefault();
     criarUsuario();
 });
 

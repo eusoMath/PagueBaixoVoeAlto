@@ -1,5 +1,3 @@
-import { auth, escreverDataUsuario, lerDataUsuario, adicionarVooFavorito, removerVooFavorito, verificarVooFavorito } from './firebase.js';
-
 let voosExibidosInicial = 8;
 let todosVoos = [];
 let voosAtualmenteExibidos = [];
@@ -42,7 +40,10 @@ async function carregarDados() {
         const dados = await carregarVoosLocais();
         if (dados && dados.data && dados.data.itineraries) {
             todosVoos = dados.data.itineraries;
-            document.getElementById('resultados').innerHTML = '';
+            voosAtualmenteExibidos = []; 
+            const resultadosDiv = document.getElementById('resultados');
+            if(resultadosDiv) resultadosDiv.innerHTML = '';
+            
             exibirProximosVoos(voosExibidosInicial);
         } else {
             console.warn("Nenhum dado de voo encontrado ou estrutura inválida.");
@@ -52,12 +53,12 @@ async function carregarDados() {
     }
 }
 
-function exibirResultados(voos) {
-    let resultadosDiv = document.getElementById('resultados');
+function exibirResultados(voos, containerId) {
+    let resultadosDiv = document.getElementById(containerId);
+    
     if (!resultadosDiv) {
-        resultadosDiv = document.createElement('div');
-        resultadosDiv.id = 'resultados';
-        document.querySelector('section').appendChild(resultadosDiv);
+        console.error(`Container com ID '${containerId}' não foi encontrado no HTML.`);
+        return;
     }
 
     voos.forEach(itinerary => {
@@ -88,12 +89,10 @@ function exibirResultados(voos) {
                     await removerVooFavorito(userId, vooId);
                     clickedButton.classList.remove('favorited');
                     clickedButton.innerHTML = '&#9733;';
-                    alert('Voo removido dos favoritos!');
                 } else {
                     await adicionarVooFavorito(userId, vooId, vooParaFavoritar);
                     clickedButton.classList.add('favorited');
                     clickedButton.innerHTML = '&#9733;';
-                    alert('Voo adicionado aos favoritos!');
                 }
             } catch (error) {
                 console.error("Erro ao favoritar/desfavoritar voo:", error);
@@ -108,15 +107,9 @@ function exibirResultados(voos) {
         const arrivalDate = new Date(itinerary.legs[0].arrival);
 
         const formattedDepartureDate = departureDate.toLocaleDateString('pt-BR');
-        const formattedDepartureTime = departureDate.toLocaleTimeString('pt-BR', {
-            hour: '2-digit',
-            minute: '2-digit',
-        });
+        const formattedDepartureTime = departureDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         const formattedArrivalDate = arrivalDate.toLocaleDateString('pt-BR');
-        const formattedArrivalTime = arrivalDate.toLocaleTimeString('pt-BR', {
-            hour: '2-digit',
-            minute: '2-digit',
-        });
+        const formattedArrivalTime = arrivalDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
         const departure = document.createElement('p');
         departure.textContent = `Partida: ${formattedDepartureDate} - ${formattedDepartureTime}`;
@@ -147,10 +140,7 @@ function exibirResultados(voos) {
             caixaDeCompra.style.display = 'inline';
             caixaDeCompra.style.opacity = '1';
 
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
             botaoProsseguirCompra.textContent = 'Prosseguir';
             botaoProsseguirCompra.removeEventListener('click', finalizarCompra);
@@ -175,17 +165,14 @@ function exibirResultados(voos) {
                     const favorito = await verificarVooFavorito(user.uid, vooId);
                     if (favorito) {
                         favoritarButton.classList.add('favorited');
-                        favoritarButton.innerHTML = '&#9733;';
                     } else {
                         favoritarButton.classList.remove('favorited');
-                        favoritarButton.innerHTML = '&#9733;';
                     }
                 } catch (error) {
                     console.error("Erro ao verificar status de favorito do voo:", error);
                 }
             } else {
                 favoritarButton.classList.remove('favorited');
-                favoritarButton.innerHTML = '&#9733;';
             }
         });
     });
@@ -194,24 +181,24 @@ function exibirResultados(voos) {
 function exibirProximosVoos(quantidade = 4) {
     const proximoLimite = voosAtualmenteExibidos.length + quantidade;
     const novosVoos = todosVoos.slice(voosAtualmenteExibidos.length, proximoLimite);
-    exibirResultados(novosVoos);
+    exibirResultados(novosVoos, 'resultados');
     voosAtualmenteExibidos = todosVoos.slice(0, proximoLimite);
     exibirBotaoMostrarMais();
 }
 
 function exibirBotaoMostrarMais() {
     const mostrarMaisButton = document.getElementById('mostrarMaisButton');
-    if (todosVoos.length > voosAtualmenteExibidos.length) {
-        mostrarMaisButton.style.display = 'block';
-        mostrarMaisButton.onclick = () => {
-            exibirProximosVoos();
-            document.getElementById("sect1").style.height = "fit-content";
-        };
-        if (!document.getElementById("sect1").contains(mostrarMaisButton)) {
-            document.getElementById("sect1").appendChild(mostrarMaisButton);
+    if (mostrarMaisButton) {
+        if (todosVoos.length > voosAtualmenteExibidos.length) {
+            mostrarMaisButton.style.display = 'block';
+            mostrarMaisButton.onclick = () => {
+                exibirProximosVoos();
+                const sect1 = document.getElementById("sect1");
+                if(sect1) sect1.style.height = "fit-content";
+            };
+        } else {
+            mostrarMaisButton.style.display = 'none';
         }
-    } else {
-        mostrarMaisButton.style.display = 'none';
     }
 }
 
@@ -226,11 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     try {
                         const username = await lerDataUsuario(user.uid);
-                        if (username) {
-                            nomeUsuarioElement.textContent = `Bem-vindo(a), ${username}!`;
-                        } else {
-                            nomeUsuarioElement.textContent = `Bem-vindo(a), ${user.email}!`;
-                        }
+                        nomeUsuarioElement.textContent = `Bem-vindo(a), ${username || user.email}!`;
                     } catch (error) {
                         console.error("Erro ao ler nome do usuário do banco de dados:", error);
                         nomeUsuarioElement.textContent = `Bem-vindo(a), ${user.email}!`;
@@ -242,41 +225,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById('Buscar').addEventListener('click', () => {
-        voosExibidosInicial = 8;
-        voosAtualmenteExibidos = [];
-        document.getElementById('resultados').innerHTML = '';
-        carregarDados();
-    });
-
-    const mostrarMaisButton = document.createElement('button');
-    mostrarMaisButton.id = 'mostrarMaisButton';
-    mostrarMaisButton.textContent = 'Mostrar Mais';
-    mostrarMaisButton.style.display = 'none';
-    const sect1 = document.getElementById('sect1');
-    if (sect1) {
-        sect1.appendChild(mostrarMaisButton);
-    } else {
-        console.error("Elemento com ID 'sect1' não encontrado no HTML.");
+    const buscarButton = document.getElementById('Buscar');
+    if (buscarButton) {
+        buscarButton.addEventListener('click', () => {
+            voosExibidosInicial = 8;
+            carregarDados();
+        });
     }
-
     carregarDados();
 });
 
 document.getElementById('fecharCaixaDeCompra').addEventListener('click', () => {
     caixaDeCompra.style.display = 'none';
     caixaDeCompra.style.opacity = '0';
-    botaoProsseguirCompra.textContent = 'Prosseguir';
-    botaoProsseguirCompra.removeEventListener('click', finalizarCompra);
-    botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra);
-    recaptchaResolvido = true;
+    recaptchaResolvido = false;
 });
 
 const prosseguirBtn = document.getElementById('prosseguir');
 if (prosseguirBtn) {
     prosseguirBtn.addEventListener('click', prosseguirParaCompra);
-} else {
-    console.error("Botão com ID 'prosseguir' não encontrado.");
 }
 
 function prosseguirParaCompra() {
@@ -305,20 +272,12 @@ function finalizarCompra() {
             }
             caixaDeCompra.style.display = 'none';
             caixaDeCompra.style.opacity = '0';
-            botaoProsseguirCompra.textContent = 'Prosseguir';
-            botaoProsseguirCompra.removeEventListener('click', finalizarCompra);
-            botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra);
-            recaptchaResolvido = true;
         })
         .catch(error => {
             console.error("Erro ao finalizar compra e buscar link:", error);
             alert("Ocorreu um erro ao tentar finalizar a compra. Por favor, tente novamente.");
             caixaDeCompra.style.display = 'none';
             caixaDeCompra.style.opacity = '0';
-            botaoProsseguirCompra.textContent = 'Prosseguir';
-            botaoProsseguirCompra.removeEventListener('click', finalizarCompra);
-            botaoProsseguirCompra.addEventListener('click', prosseguirParaCompra);
-            recaptchaResolvido = true;
         });
 }
 
@@ -327,38 +286,43 @@ function buscarLinkCompanhiaAerea(nomeCompanhia) {
         console.error("Chave de API ou ID do mecanismo de pesquisa do Google não configurados.");
         return Promise.resolve(null);
     }
-
     const query = `${nomeCompanhia} site oficial`;
     const apiUrl = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(query)}`;
-
     return fetch(apiUrl)
         .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(`Erro na requisição da API de busca: ${response.status} - ${err.error?.message || response.statusText}`);
-                }).catch(() => {
-                    throw new Error(`Erro na requisição da API de busca: ${response.status} - ${response.statusText}`);
-                });
-            }
+            if (!response.ok) throw new Error(`Erro na API de busca: ${response.statusText}`);
             return response.json();
         })
         .then(data => {
             if (data.items && data.items.length > 0) {
                 const officialLink = data.items.find(item => {
                     const url = item.link.toLowerCase();
-                    return url.includes(nomeCompanhia.toLowerCase().replace(/ linhas aéreas| airlines brasil| /g, '')) &&
-                           !url.includes('wikipedia') &&
-                           !url.includes('melhoresdestinos') &&
-                           !url.includes('reclameaqui');
+                    const commonName = nomeCompanhia.toLowerCase().replace(/ linhas aéreas| airlines brasil| /g, '');
+                    return url.includes(commonName) && !url.includes('wikipedia') && !url.includes('melhoresdestinos') && !url.includes('reclameaqui');
                 });
                 return officialLink ? officialLink.link : data.items[0].link;
-            } else {
-                console.log(`Nenhum site oficial encontrado para ${nomeCompanhia}.`);
-                return null;
             }
+            return null;
         })
         .catch(error => {
             console.error("Erro ao buscar o site da companhia aérea:", error);
             return null;
         });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const logoutButton = document.getElementById('logout-button');
+
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            console.log("Botão de logout clicado. Tentando deslogar...");
+            auth.signOut().then(() => {
+                console.log('Usuário deslogado com sucesso.');
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                console.error('Erro ao fazer logout:', error);
+                alert('Ocorreu um erro ao tentar sair. Por favor, tente novamente.');
+            });
+        });
+    }
+});

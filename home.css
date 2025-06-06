@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 * {
-    box-sizing: border-box;
+    box-sizing:border-box;
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -28,6 +28,7 @@
 
 .container {
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
     gap: 10px;
     padding: 20px 50px;
@@ -36,14 +37,39 @@
     align-items: center;
 }
 
-.localDePartida, .localDeChegada, .data, .adultos, .criancas, .bebes, .classe-cabine {
+.subheader {
+    height: 45px;
+    padding: 5px 15px;
+    background-color: #C2B078;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+.adultos input, .criancas input , .bebes input  {
+    width: 55px;
 }
 
 .container label {
     color: #111111;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
 }
 
 #Buscar {
@@ -61,13 +87,12 @@
 }
 
 #resultados {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 95vw;
-    gap: 20px;
-    align-self: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 95vw;
+  align-self: center;
+  padding: 20px 0;
   }
   
 
@@ -253,4 +278,19 @@
 
 .card .favoritar-btn.favorited {
     color: #d4ac26; 
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+}
+
+.links a {
+    color: #131313;
+    font-weight: bolder;
+}
+
+.links a:hover {
+    cursor: pointer;
+    filter: invert(25%);
 }

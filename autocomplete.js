@@ -1,13 +1,13 @@
 //API ORIGINAL = 0bfc4cee93msh2bf7f105650ac0ep136bcdjsn20c6d63f41d3
 //API RESERVA = c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd
 
-const apiKey = 'c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd'; // Substitua pela sua API key
+const apiKey = 'c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd';
 
 let partidaId = '';
 let chegadaId = '';
 
 async function buscarSugestoes(termo) {
-  const url = `https://skyscanner80.p.rapidapi.com/api/v1/flights/auto-complete?query=${termo}&market=BR&locale=pt-BR`;
+  const url = `https://skyscanner80.p.rapidapi.com/api/v1/flights/auto-complete?query=${termo}&market=BR&locale=pt-BR&currency=BRL`;
   const options = {
     method: 'GET',
     headers: {
@@ -19,38 +19,44 @@ async function buscarSugestoes(termo) {
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    return result.data || []; // Retorna um array de lugares ou um array vazio
+    return result.data || [];
   } catch (error) {
     console.error('Erro ao buscar sugestões:', error);
     return [];
   }
 }
 
-async function configurarAutocomplete(inputId, datalistId, idHiddenInputId, idVariable) {
+async function configurarAutocomplete(inputId, datalistId, idVariable) {
   const inputElement = document.getElementById(inputId);
   const datalistElement = document.getElementById(datalistId);
+
+  if (!inputElement || !datalistElement) {
+    console.error(`Elemento de input ou datalist não encontrado para: ${inputId}`);
+    return;
+  }
 
   inputElement.addEventListener('input', async () => {
     const termo = inputElement.value;
     if (termo.length < 3) {
-      datalistElement.innerHTML = ''; // Limpa as sugestões se o termo for curto
+      datalistElement.innerHTML = '';
       return;
     }
 
     const sugestoes = await buscarSugestoes(termo);
-    datalistElement.innerHTML = ''; // Limpa as sugestões anteriores
+    datalistElement.innerHTML = '';
 
     sugestoes.forEach(sugestao => {
       const option = document.createElement('option');
-      option.value = sugestao.presentation.suggestionTitle; // Usa suggestionTitle como label
-      option.dataset.placeId = sugestao.id; // Armazena o ID no dataset
+      option.value = sugestao.presentation.suggestionTitle;
+      option.dataset.placeId = sugestao.id;
       datalistElement.appendChild(option);
     });
   });
 
   inputElement.addEventListener('change', () => {
-    const selectedOption = datalistElement.querySelector(`option[value="${inputElement.value}"]`);
-    if (selectedOption) {
+    const selectedOption = Array.from(datalistElement.options).find(opt => opt.value === inputElement.value);
+
+    if (selectedOption && selectedOption.dataset.placeId) {
       if (idVariable === 'partidaId') {
         partidaId = selectedOption.dataset.placeId;
       } else if (idVariable === 'chegadaId') {
@@ -67,9 +73,7 @@ async function configurarAutocomplete(inputId, datalistId, idHiddenInputId, idVa
   });
 }
 
-// Configura os autocompletes para os campos de partida e chegada
-configurarAutocomplete('localPartidaInput', 'sugestoesPartida', 'idPartidaHidden', 'partidaId');
-configurarAutocomplete('localChegadaInput', 'sugestoesChegada', 'idChegadaHidden', 'chegadaId');
-
-// Exporta as variáveis partidaId e chegadaId
-export { partidaId, chegadaId };
+document.addEventListener('DOMContentLoaded', () => {
+    configurarAutocomplete('localPartidaInput', 'sugestoesPartida', 'partidaId');
+    configurarAutocomplete('localChegadaInput', 'sugestoesChegada', 'chegadaId');
+});

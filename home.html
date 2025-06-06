@@ -22,6 +22,13 @@
         <div class="g-recaptcha" data-sitekey="6Lei-zUrAAAAAMkrUl4hhNj9H7V1PLYJwt88CFUo" data-callback="onRecaptchaSuccess"></div>
         <button id="prosseguir">Prosseguir</button>
     </div>
+        <div class="subheader">
+            <div class="links">
+                <a href="./home.html">Pesquisar</a>
+                <a href="./favoritos.html">Favoritos</a>
+            </div>
+        <button id="logout-button" class="logout-button">Sair</button>
+        </div>
     <div class="container" id="header">
         <div class="localDePartida">
             <label for="localPartidaInput">De:</label>
@@ -60,7 +67,7 @@
                 <option value="first">Primeira Classe</option>
             </select>
         </div>
-        <input type="button" value="buscar" id="Buscar">
+        <input type="button" value="Buscar" id="Buscar">
     </div>
     <div class="divisor"></div>
     <section class="sect-1" id="sect1">
@@ -89,11 +96,11 @@
         </a>
     </section>
 
-    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.4.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-    <script type="module" src="firebase.js"></script>
-    <script type="module" src="teste.js"></script>
+    <script src="./firebase.js"></script>
+    <script src="./main.js"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@ firebase.auth().onAuthStateChanged(user => {
   if (user) {
     lerDataUsuario(user.uid);
   } else {
-    window.location.href = "index.html"; // Redireciona para a página de login se não estiver logado
+    window.location.href = "index.html";
   }
 });
 
