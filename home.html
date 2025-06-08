@@ -1,80 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt-BR"> <head>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<html lang="pt-br">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pague Baixo Voe Alto - Busca</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="home.css">
-    <link rel="shortcut icon" href="/assets/Logos/airplane-svgrepo-com.svg" type="image/x-icon">
-    <title>Voe Alto - Página Inicial</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="shortcut icon" href="./assets/Logos/airplane-svgrepo-com.svg" type="image/x-icon">
+
 </head>
-<body id="inicioDaPagina">
-    <div id="caixaDeCompra" class="caixaDeCompra">
-        <img src="./assets/Logos/close-svgrepo-com.svg" alt="Fechar" id="fecharCaixaDeCompra" width="25px">
+<body>
+    <div id="caixaDeCompra" style="display: none;">
+        <img src="./assets/Logos/close-svgrepo-com.svg" alt="Fechar" id="fecharCaixaDeCompra" width="25px" style="cursor: pointer; float: right;">
         <h1>Você deseja continuar sua compra?</h1>
         <p id="preco"></p>
         <p id="partida"></p>
         <p id="chegada"></p>
         <p id="duracao"></p>
         <p id="companhia"></p>
-        <p class="textoGuia">
-            Faça a verificação para prosseguir ao site da companhia aérea.
-        </p>
-        <div class="g-recaptcha" data-sitekey="6Lei-zUrAAAAAMkrUl4hhNj9H7V1PLYJwt88CFUo" data-callback="onRecaptchaSuccess"></div>
+        <div id="recaptcha-container"></div>
         <button id="prosseguir">Prosseguir</button>
     </div>
-        <div class="subheader">
-            <div class="links">
-                <a href="./home.html">Pesquisar</a>
-                <a href="./favoritos.html">Favoritos</a>
-            </div>
+    <div class="subheader">
+        <div class="links">
+            <a href="./home.html">Pesquisar</a>
+            <a href="./favoritos.html">Favoritos</a>
+        </div>
         <button id="logout-button" class="logout-button">Sair</button>
-        </div>
-    <div class="container" id="header">
-        <div class="localDePartida">
-            <label for="localPartidaInput">De:</label>
-            <input type="text" placeholder="Local de Partida" id="localPartidaInput" list="sugestoesPartida" autocomplete="off">
-            <datalist id="sugestoesPartida"></datalist>
-            <input type="hidden" id="idPartidaHidden">
-        </div>
-        <div class="localDeChegada">
-            <label for="localChegadaInput">Para:</label>
-            <input type="text" id="localChegadaInput" placeholder="Local de Chegada" list="sugestoesChegada" autocomplete="off">
-            <datalist id="sugestoesChegada"></datalist>
-            <input type="hidden" id="idChegadaHidden">
-        </div>
-        <div class="data">
-            <label for="dataDePartida">Data:</label>
-            <input type="date" id="dataDePartida">
-        </div>
-        <div class="adultos">
-            <label for="adultos">Adultos:</label>
-            <input type="number" id="adultos" placeholder="Adultos" value="1">
-        </div>
-        <div class="criancas">
-            <label for="criancas">Crianças:</label>
-            <input type="number" id="criancas" placeholder="Crianças" value="0">
-        </div>
-        <div class="bebes">
-            <label for="bebes">Bebês:</label>
-            <input type="number" id="bebes" placeholder="Bebês" value="0">
-        </div>
-        <div class="classe-cabine">
-            <label for="classeCabine">Classe da Cabine:</label>
-            <select id="classeCabine">
-                <option value="economy">Econômica</option>
-                <option value="premium_economy">Econômica Premium</option>
-                <option value="business">Executiva</option>
-                <option value="first">Primeira Classe</option>
-            </select>
-        </div>
-        <input type="button" value="Buscar" id="Buscar">
     </div>
-    <div class="divisor"></div>
-    <section class="sect-1" id="sect1">
-        <div id="resultados"></div>
+<div class="container">
+    <div>
+        <label for="localPartidaInput">Partida</label>
+        <input type="text" id="localPartidaInput" list="sugestoesPartida" placeholder="Digite uma cidade ou aeroporto">
+        <datalist id="sugestoesPartida"></datalist>
+    </div>
+
+    <div>
+        <label for="localChegadaInput">Chegada</label>
+        <input type="text" id="localChegadaInput" list="sugestoesChegada" placeholder="Digite uma cidade ou aeroporto">
+        <datalist id="sugestoesChegada"></datalist>
+    </div>
+
+    <div>
+        <label for="dataDePartida">Data de Partida</label>
+        <input type="date" id="dataDePartida">
+    </div>
+
+    <div>
+        <label for="adultos">Adultos</label>
+        <input type="number" id="adultos" value="1" min="1">
+    </div>
+    
+    <button id="Buscar">Buscar</button>
+</div>
+    <section class="sect-1" id="sect-1">
+        <h1 id="mensagemVoo">Voos Encontrados</h1>
+        <div id="resultados" class="resultados"></div>
         <button id="mostrarMaisButton" style="display: none;">Mostrar Mais</button>
     </section>
-    <div class="divisor"></div>
+        <div class="divisor"></div>
     <section id="contact">
         <a href="https://github.com/eusoMath/" target="_blank">
             <div class="caixa-footer">
@@ -96,11 +81,11 @@
         </a>
     </section>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-    <script src="./firebase.js"></script>
-    <script src="./main.js"></script>
+    <script src="./firebase.js" type="module"></script>
+    <script src="./amadeus-api.js" type="module"></script>
+    <script src="./purchase-modal.js" type="module"></script>
+    <script src="./card-renderer.js" type="module"></script>
+    <script src="./autocomplete.js" type="module"></script>
+    <script src="./main.js" type="module"></script>
 </body>
 </html>

@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-M">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus Voos Favoritos - Pague Baixo Voe Alto</title>
+    <title>Meus Voos Favoritos</title>
+    <link rel="stylesheet" href="favoritos.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="favoritos.css">
+    <link rel="shortcut icon" href="./assets/Logos/airplane-svgrepo-com.svg" type="image/x-icon">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body>
-    <main>
-        <div id="caixaDeCompra" class="caixaDeCompra">
-        <img src="./assets/Logos/close-svgrepo-com.svg" alt="Fechar" id="fecharCaixaDeCompra" width="25px">
+    <div id="caixaDeCompra" style="display: none;">
+        <img src="./assets/Logos/close-svgrepo-com.svg" alt="Fechar" id="fecharCaixaDeCompra" width="25px" style="cursor: pointer; float: right;">
         <h1>Você deseja continuar sua compra?</h1>
         <p id="preco"></p>
         <p id="partida"></p>
         <p id="chegada"></p>
         <p id="duracao"></p>
         <p id="companhia"></p>
-        <p class="textoGuia">
-            Faça a verificação para prosseguir ao site da companhia aérea.
-        </p>
-        <div class="g-recaptcha" data-sitekey="6Lei-zUrAAAAAMkrUl4hhNj9H7V1PLYJwt88CFUo" data-callback="onRecaptchaSuccess"></div>
+        <div id="recaptcha-container"></div>
         <button id="prosseguir">Prosseguir</button>
     </div>
-        <div class="subheader">
-            <div class="links">
-                <a href="./home.html">Pesquisar</a>
-                <a href="./favoritos.html">Favoritos</a>
-            </div>
-        <button id="logout-button" class="logout-button">Sair</button>
+    <div class="subheader">
+        <div class="links">
+            <a href="./home.html">Pesquisar</a>
+            <a href="./favoritos.html">Favoritos</a>
         </div>
-        <section id="sect1" class="sect-1">
-            <h1>Meus Voos Favoritos</h1>
-            <p id="mensagem-sem-favoritos" style="display: none;">Você ainda não favoritou nenhum voo.</p>
-            <div id="resultados-favoritos" class="resultados">
-                </div>
-        </section>
+        <button id="logout-button" class="logout-button">Sair</button>
+    </div>
+    <section class="sect-1" id="sect-1">
+        <h1>Meus Voos Favoritos</h1>
+        <p id="mensagem-sem-favoritos" style="display: none;">Você ainda não favoritou nenhum voo.</p>
+        <div id="resultados-favoritos" class="resultados"></div>
+    </section>
         <div class="divisor"></div>
-        <section id="contact">
+    <section id="contact">
         <a href="https://github.com/eusoMath/" target="_blank">
             <div class="caixa-footer">
                 <img width="50px" src="./assets/Logos/github.svg" alt="logo github">
@@ -58,14 +56,11 @@
             </div>
         </a>
     </section>
-    </main>
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
-    <script src="./firebase.js"></script>
-    <script src="./teste.js"></script> 
-    <script src="./favoritos.js"></script>
+    <script src="./firebase.js" type="module"></script>
+    <script src="./amadeus-api.js" type="module"></script>
+    <script src="./purchase-modal.js" type="module"></script>
+    <script src="./card-renderer.js" type="module"></script>
+    <script src="./favoritos.js" type="module"></script>
 </body>
 </html>

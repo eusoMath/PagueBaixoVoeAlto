@@ -1,79 +1,48 @@
-//API ORIGINAL = 0bfc4cee93msh2bf7f105650ac0ep136bcdjsn20c6d63f41d3
-//API RESERVA = c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd
-
-const apiKey = 'c3cef0936cmshc1e136970fdb9a0p1f561fjsn72399617d2cd';
+import { buscarSugestoesAmadeus } from './amadeus-api.js';
 
 let partidaId = '';
 let chegadaId = '';
+let debounceTimeout;
 
-async function buscarSugestoes(termo) {
-  const url = `https://skyscanner80.p.rapidapi.com/api/v1/flights/auto-complete?query=${termo}&market=BR&locale=pt-BR&currency=BRL`;
-  const options = {
-    method: 'GET',
-    headers: {
-      'x-rapidapi-key': apiKey,
-      'x-rapidapi-host': 'skyscanner80.p.rapidapi.com'
-    }
-  };
-
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    return result.data || [];
-  } catch (error) {
-    console.error('Erro ao buscar sugestões:', error);
-    return [];
-  }
-}
-
-async function configurarAutocomplete(inputId, datalistId, idVariable) {
+function configurarAutocomplete(inputId, datalistId, idVariable) {
   const inputElement = document.getElementById(inputId);
   const datalistElement = document.getElementById(datalistId);
+  if (!inputElement || !datalistElement) return;
 
-  if (!inputElement || !datalistElement) {
-    console.error(`Elemento de input ou datalist não encontrado para: ${inputId}`);
-    return;
-  }
-
-  inputElement.addEventListener('input', async () => {
+  inputElement.addEventListener('input', () => {
+    clearTimeout(debounceTimeout);
     const termo = inputElement.value;
-    if (termo.length < 3) {
+    if (termo.length < 3) { datalistElement.innerHTML = ''; return; }
+    debounceTimeout = setTimeout(async () => {
+      const sugestoes = await buscarSugestoesAmadeus(termo);
       datalistElement.innerHTML = '';
-      return;
-    }
-
-    const sugestoes = await buscarSugestoes(termo);
-    datalistElement.innerHTML = '';
-
-    sugestoes.forEach(sugestao => {
-      const option = document.createElement('option');
-      option.value = sugestao.presentation.suggestionTitle;
-      option.dataset.placeId = sugestao.id;
-      datalistElement.appendChild(option);
-    });
+      if (sugestoes) {
+        sugestoes.forEach(sugestao => {
+          const option = document.createElement('option');
+          option.value = `${sugestao.name} (${sugestao.iataCode})`;
+          option.dataset.placeId = sugestao.iataCode;
+          datalistElement.appendChild(option);
+        });
+      }
+    }, 500);
   });
 
   inputElement.addEventListener('change', () => {
     const selectedOption = Array.from(datalistElement.options).find(opt => opt.value === inputElement.value);
-
-    if (selectedOption && selectedOption.dataset.placeId) {
-      if (idVariable === 'partidaId') {
-        partidaId = selectedOption.dataset.placeId;
-      } else if (idVariable === 'chegadaId') {
-        chegadaId = selectedOption.dataset.placeId;
-      }
-      console.log(`ID selecionado (${idVariable}):`, selectedOption.dataset.placeId);
-    } else {
-      if (idVariable === 'partidaId') {
-        partidaId = '';
-      } else if (idVariable === 'chegadaId') {
-        chegadaId = '';
-      }
-    }
+    let iataCode = '';
+    if (selectedOption && selectedOption.dataset.placeId) { iataCode = selectedOption.dataset.placeId; }
+    if (idVariable === 'partidaId') { partidaId = iataCode; } 
+    else if (idVariable === 'chegadaId') { chegadaId = iataCode; }
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function getLugarIds() {
+    return { partidaId, chegadaId };
+}
+
+export function inicializarAutocomplete() {
     configurarAutocomplete('localPartidaInput', 'sugestoesPartida', 'partidaId');
     configurarAutocomplete('localChegadaInput', 'sugestoesChegada', 'chegadaId');
-});
+}
+
+export { getLugarIds };

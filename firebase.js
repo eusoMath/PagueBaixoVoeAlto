@@ -1,3 +1,7 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getDatabase, ref, set, get, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyA_UGAa-oEn1nruQpdMtax1LgebMJxjGIM",
   authDomain: "voe-alto-pague-baixo.firebaseapp.com",
@@ -8,108 +12,39 @@ const firebaseConfig = {
   databaseURL: "https://voe-alto-pague-baixo-default-rtdb.firebaseio.com"
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-const auth = firebase.auth();
-
-function escreverDataUsuario(userId, name) {
-  if (!userId) {
-    console.error("escreverDataUsuario: userId é nulo ou indefinido.");
-    return Promise.reject(new Error("userId é obrigatório para escrever dados do usuário."));
-  }
-  return database.ref('users/' + userId).set({
-    username: name
-  })
-  .then(() => {
-    console.log(`Dados do usuário ${userId} escritos com sucesso.`);
-  })
-  .catch(error => {
-    console.error("Erro ao escrever dados do usuário:", error);
-    throw error;
-  });
-}
-
-async function lerDataUsuario(userId) {
-  if (!userId) {
-    console.error("lerDataUsuario: userId é nulo ou indefinido. Retornando null.");
-    return null;
-  }
-  try {
-    const snapshot = await database.ref('users/' + userId).once('value');
-    if (snapshot.exists()) {
-      const userData = snapshot.val();
-      const username = userData.username;
-      console.log("Nome do usuário lido:", username);
-      return username;
-    } else {
-      console.log(`Nenhum dado de usuário encontrado para o ID: ${userId}`);
-      return null;
-    }
-  } catch (error) {
-    console.error(`Erro ao ler dados do usuário ${userId}:`, error);
-    throw error;
-  }
-}
-
-function adicionarVooFavorito(userId, flightId, flightData) {
-    if (!userId) {
-        console.error("adicionarVooFavorito: userId é nulo ou indefinido.");
-        return Promise.reject(new Error("userId é obrigatório para adicionar voo favorito."));
-    }
-    return database.ref('users/' + userId + '/favoritedFlights/' + flightId).set(flightData)
-        .then(() => {
-            console.log(`Voo ${flightId} adicionado aos favoritos do usuário ${userId}.`);
-        })
-        .catch(error => {
-            console.error("Erro ao adicionar voo favorito:", error);
-            throw error;
-        });
-}
-
-function removerVooFavorito(userId, flightId) {
-    if (!userId) {
-        console.error("removerVooFavorito: userId é nulo ou indefinido.");
-        return Promise.reject(new Error("userId é obrigatório para remover voo favorito."));
-    }
-    return database.ref('users/' + userId + '/favoritedFlights/' + flightId).remove()
-        .then(() => {
-            console.log(`Voo ${flightId} removido dos favoritos do usuário ${userId}.`);
-        })
-        .catch(error => {
-            console.error("Erro ao remover voo favorito:", error);
-            throw error;
-        });
-}
-
-async function verificarVooFavorito(userId, flightId) {
-    if (!userId) {
-        console.error("verificarVooFavorito: userId é nulo ou indefinido. Retornando false.");
-        return false;
-    }
-    try {
-        const snapshot = await database.ref('users/' + userId + '/favoritedFlights/' + flightId).once('value');
-        return snapshot.exists();
-    } catch (error) {
-        console.error("Erro ao verificar voo favorito:", error);
-        throw error;
-    }
-}
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
 
 async function lerTodosOsFavoritos(userId) {
-    if (!userId) {
-        console.error("lerTodosOsFavoritos: userId é nulo ou indefinido. Retornando array vazio.");
+    try {
+        const favoritosRef = ref(database, `users/${userId}/voosFavoritos`);
+        const snapshot = await get(favoritosRef);
+        return snapshot.exists() ? Object.values(snapshot.val()) : [];
+    } catch (error) {
+        console.error("Erro ao buscar favoritos:", error);
         return [];
     }
-    try {
-        const snapshot = await database.ref('users/' + userId + '/favoritedFlights').once('value');
-        if (snapshot.exists()) {
-            const dados = snapshot.val();
-            return Object.values(dados);
-        } else {
-            return [];
-        }
-    } catch (error) {
-        console.error("Erro ao ler todos os voos favoritos:", error);
-        throw error;
-    }
 }
+
+function adicionarVooFavorito(userId, vooId, vooData) {
+    return set(ref(database, `users/${userId}/voosFavoritos/${vooId}`), vooData);
+}
+
+function removerVooFavorito(userId, vooId) {
+    return remove(ref(database, `users/${userId}/voosFavoritos/${vooId}`));
+}
+
+async function verificarVooFavorito(userId, vooId) {
+    const snapshot = await get(ref(database, `users/${userId}/voosFavoritos/${vooId}`));
+    return snapshot.exists();
+}
+
+export {
+    auth,
+    onAuthStateChanged,
+    lerTodosOsFavoritos,
+    adicionarVooFavorito,
+    removerVooFavorito,
+    verificarVooFavorito
+};
