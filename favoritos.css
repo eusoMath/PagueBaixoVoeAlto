@@ -1,11 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #EEEEEE;
+    font-family: "Inter", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    scroll-behavior: smooth;
+}
+
 body{
     background-color: #EEEEEE;
 }
 
-.sect-1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.sect-1{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-image: linear-gradient(#111111, #333333);
+    padding: 25px;
 }
 
 .resultados {
@@ -14,5 +30,207 @@ body{
   gap: 20px;
   align-self: center;
   padding: 20px 0;
-  height: fit-content;
+}
+
+.divisor {
+    height: 5px;
+    background-color: #C2B078;
+}
+
+.subheader {
+    height: 45px;
+    padding: 5px 15px;
+    background-color: #C2B078;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logout-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+
+.card {
+    display: inline-block;
+    background-image: linear-gradient(#EEEEEE, #dddddd);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 310px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+
+.card h3 {
+    margin-top: -25px;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: #111111;
+    width: fit-content;
+}
+
+.card p {
+    font-size: 0.8em;
+    color: #111111;
+}
+
+.card button {
+    margin-top: 10px;
+    font-weight: bold;
+    border: none;
+    color: #111111;
+    background-color: #C2B078;
+    height: 35px;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    align-self: flex-start;
+}
+
+.card button:hover {
+    filter: brightness(95%);
+    transition: 300ms;
+}
+
+
+#contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+    color:#131313;
+    height: 40vh;
+    background-color: #EEEEEE;
+    padding: 50px 50px;
+}
+
+.caixa-footer {
+    width: 50px;
+    justify-items: center;
+}
+
+.caixa-footer p {
+    color: #080808;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.caixa-footer:hover {
+    filter: invert(10%);
+    transition: 300ms;
+}
+
+#caixaDeCompra {
+    position:absolute;
+    border: 5px solid #C2B078;
+    z-index: 3;
+    width: 55vw;
+    height: fit-content;
+    background-color:#EEEEEE;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-shadow: 0px 0px 30px black;
+    display: none;
+    /*
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    */
+    padding: 20px;
+}
+
+#caixaDeCompra h1 {
+    color: #080808;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+#caixaDeCompra button {
+    padding: 8px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #C2B078;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px
+}
+
+#caixaDeCompra button:hover{
+    filter: brightness(95%);
+}
+
+#caixaDeCompra p{
+    color: #000000;
+    font-size: 20px;
+}
+
+#companhia {
+    margin-bottom: 3vw;
+}
+
+#caixaDeCompra .textoGuia {
+    font-size: 13px;
+    color: gray;
+}
+
+#fecharCaixaDeCompra {
+    cursor: pointer;
+}
+
+.g-recaptcha {
+    margin-top: 5px;
+}
+
+.card .favoritar-btn {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    color: #333333; 
+    padding: 5px;
+    margin-top: -10px;
+    transition: color 0.2s ease-in-out;
+}
+
+.card .favoritar-btn:hover {
+    color: #a09060;
+}
+
+.card .favoritar-btn.favorited {
+    color: #d4ac26; 
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+}
+
+.links a {
+    color: #131313;
+    font-weight: bolder;
+}
+
+.links a:hover {
+    cursor: pointer;
+    filter: invert(25%);
 }
