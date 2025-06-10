@@ -3,463 +3,143 @@
     "itineraries": [
       {
         "price": {
-          "formatted": "R$ 350,00",
-          "raw": 350.00
+          "raw": 450.70,
+          "formatted": "R$ 450,70"
         },
-        "legs": [
-          {
-            "departure": "2024-06-20T10:00:00",
-            "arrival": "2024-06-20T14:30:00",
-            "durationInMinutes": 270,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "GOL Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
+        "legs": [{
+          "departure": "2025-10-20T10:00:00",
+          "arrival": "2025-10-20T11:05:00",
+          "durationInMinutes": 65,
+          "origin": { "name": "São Paulo (GRU)" },
+          "destination": { "name": "Rio de Janeiro (GIG)" },
+          "carriers": { "marketing": [{ "name": "LATAM" }] }
+        }]
       },
       {
         "price": {
-          "formatted": "R$ 420,00",
-          "raw": 420.00
+          "raw": 680.50,
+          "formatted": "R$ 680,50"
         },
-        "legs": [
-          {
-            "departure": "2024-06-21T08:00:00",
-            "arrival": "2024-06-21T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "LATAM Airlines Brasil"
-                }
-              ]
-            }
-          }
-        ]
+        "legs": [{
+          "departure": "2025-11-15T14:30:00",
+          "arrival": "2025-11-15T16:30:00",
+          "durationInMinutes": 120,
+          "origin": { "name": "Rio de Janeiro (GIG)" },
+          "destination": { "name": "Salvador (SSA)" },
+          "carriers": { "marketing": [{ "name": "GOL" }] }
+        }]
       },
       {
         "price": {
-          "formatted": "R$ 500,00",
-          "raw": 500.00
+          "raw": 890.00,
+          "formatted": "R$ 890,00"
         },
-        "legs": [
-          {
-            "departure": "2024-06-22T12:00:00",
-            "arrival": "2024-06-22T16:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Azul Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
+        "legs": [{
+          "departure": "2025-11-22T08:00:00",
+          "arrival": "2025-11-22T10:30:00",
+          "durationInMinutes": 150,
+          "origin": { "name": "Salvador (SSA)" },
+          "destination": { "name": "Recife (REC)" },
+          "carriers": { "marketing": [{ "name": "Azul" }] }
+        }]
       },
       {
         "price": {
-          "formatted": "R$ 380,00",
-          "raw": 380.00
+          "raw": 3250.90,
+          "formatted": "R$ 3.250,90"
         },
-        "legs": [
-          {
-            "departure": "2024-06-23T15:00:00",
-            "arrival": "2024-06-23T19:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "GOL Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
+        "legs": [{
+          "departure": "2025-12-01T22:00:00",
+          "arrival": "2025-12-02T12:00:00",
+          "durationInMinutes": 540,
+          "origin": { "name": "São Paulo (GRU)" },
+          "destination": { "name": "Lisboa (LIS)" },
+          "carriers": { "marketing": [{ "name": "TAP Air Portugal" }] }
+        }]
       },
       {
         "price": {
-          "formatted": "R$ 450,00",
-          "raw": 450.00
+          "raw": 4100.00,
+          "formatted": "R$ 4.100,00"
         },
-        "legs": [
-          {
-            "departure": "2024-06-24T09:00:00",
-            "arrival": "2024-06-24T13:30:00",
-            "durationInMinutes": 270,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "LATAM Airlines Brasil"
-                }
-              ]
-            }
-          }
-        ]
+        "legs": [{
+          "departure": "2025-12-05T20:45:00",
+          "arrival": "2025-12-06T05:30:00",
+          "durationInMinutes": 525,
+          "origin": { "name": "Rio de Janeiro (GIG)" },
+          "destination": { "name": "Miami (MIA)" },
+          "carriers": { "marketing": [{ "name": "American Airlines" }] }
+        }]
       },
       {
         "price": {
-          "formatted": "R$ 520,00",
-          "raw": 520.00
+          "raw": 720.80,
+          "formatted": "R$ 720,80"
         },
-        "legs": [
-          {
-            "departure": "2024-06-25T11:00:00",
-            "arrival": "2024-06-25T15:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Azul Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
+        "legs": [{
+          "departure": "2025-10-25T18:00:00",
+          "arrival": "2025-10-25T20:10:00",
+          "durationInMinutes": 130,
+          "origin": { "name": "Brasília (BSB)" },
+          "destination": { "name": "São Paulo (CGH)" },
+          "carriers": { "marketing": [{ "name": "LATAM" }] }
+        }]
       },
       {
         "price": {
-          "formatted": "R$ 400,00",
-          "raw": 400.00
+          "raw": 955.00,
+          "formatted": "R$ 955,00"
         },
-        "legs": [
-          {
-            "departure": "2024-06-26T14:00:00",
-            "arrival": "2024-06-26T18:30:00",
-            "durationInMinutes": 270,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "GOL Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
+        "legs": [{
+          "departure": "2025-11-18T06:15:00",
+          "arrival": "2025-11-18T09:05:00",
+          "durationInMinutes": 170,
+          "origin": { "name": "Curitiba (CWB)" },
+          "destination": { "name": "Rio de Janeiro (SDU)" },
+          "carriers": { "marketing": [{ "name": "Azul" }] }
+        }]
       },
       {
         "price": {
-          "formatted": "R$ 480,00",
-          "raw": 480.00
+          "raw": 5150.20,
+          "formatted": "R$ 5.150,20"
         },
-        "legs": [
-          {
-            "departure": "2024-06-27T07:00:00",
-            "arrival": "2024-06-27T11:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "LATAM Airlines Brasil"
-                }
-              ]
-            }
-          }
-        ]
+        "legs": [{
+          "departure": "2025-12-10T23:00:00",
+          "arrival": "2025-12-11T14:00:00",
+          "durationInMinutes": 660,
+          "origin": { "name": "São Paulo (GRU)" },
+          "destination": { "name": "Paris (CDG)" },
+          "carriers": { "marketing": [{ "name": "Air France" }] }
+        }]
       },
       {
         "price": {
-          "formatted": "R$ 550,00",
-          "raw": 550.00
-        },
-        "legs": [
-          {
-            "departure": "2024-06-28T13:00:00",
-            "arrival": "2024-06-28T17:30:00",
-            "durationInMinutes": 270,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Azul Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
+            "raw": 550.00,
+            "formatted": "R$ 550,00"
+          },
+          "legs": [{
+            "departure": "2025-11-05T15:00:00",
+            "arrival": "2025-11-05T16:20:00",
+            "durationInMinutes": 80,
+            "origin": { "name": "Belo Horizonte (CNF)" },
+            "destination": { "name": "São Paulo (CGH)" },
+            "carriers": { "marketing": [{ "name": "GOL" }] }
+          }]
       },
       {
         "price": {
-          "formatted": "R$ 430,00",
-          "raw": 430.00
-        },
-        "legs": [
-          {
-            "departure": "2024-06-29T16:00:00",
-            "arrival": "2024-06-29T20:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "GOL Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 510,00",
-          "raw": 510.00
-        },
-        "legs": [
-          {
-            "departure": "2024-06-30T10:00:00",
-            "arrival": "2024-06-30T14:30:00",
-            "durationInMinutes": 270,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "LATAM Airlines Brasil"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Azul Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "VoePass Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Itapemirim Transportes Aéreos"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Voe Azul"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "LATAM Airlines"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Avianca Brasil"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "MAP Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Passaredo Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Total Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Sideral Linhas Aéreas"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Modern Logistics"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
-        "price": {
-          "formatted": "R$ 460,00",
-          "raw": 460.00
-        },
-        "legs": [
-          {
-            "departure": "2024-07-01T08:00:00",
-            "arrival": "2024-07-01T12:00:00",
-            "durationInMinutes": 240,
-            "carriers": {
-              "marketing": [
-                {
-                  "name": "Cargo BR"
-                }
-              ]
-            }
-          }
-        ]
+            "raw": 1200.40,
+            "formatted": "R$ 1.200,40"
+          },
+          "legs": [{
+            "departure": "2025-11-28T11:00:00",
+            "arrival": "2025-11-28T14:30:00",
+            "durationInMinutes": 210,
+            "origin": { "name": "Manaus (MAO)" },
+            "destination": { "name": "Brasília (BSB)" },
+            "carriers": { "marketing": [{ "name": "LATAM" }] }
+          }]
       }
     ]
   }

@@ -52,9 +52,9 @@
 }
 
 .logout-button {
-    background-color: #dc3545;
+    background-color: #222222;
     color: white;
-    padding: 8px 15px;
+    padding: 8px 25px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -77,9 +77,10 @@
 }
 
 #Buscar {
-    padding: 8px;
+    padding: 8px 25px;
     background-color: #C2B078;
     color: #000000;
+    border-radius: 5px;
     font-weight: bolder;
     border: none;
     cursor: pointer;
@@ -297,4 +298,60 @@
 .links a:hover {
     cursor: pointer;
     filter: invert(25%);
+}
+
+.modo-teste-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #222222; /* Cor para API Real */
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #222222; /* Cor para Modo Teste */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+body {
+    background-color: #EEEEEE;
 }

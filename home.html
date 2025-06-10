@@ -12,9 +12,11 @@
 </head>
 <body>
     <div id="caixaDeCompra" style="display: none;">
-        <img src="./assets/Logos/close-svgrepo-com.svg" alt="Fechar" id="fecharCaixaDeCompra" width="25px" style="cursor: pointer; float: right;">
-        <h1>Você deseja continuar sua compra?</h1>
+        <img src="./assets/Logos/close-svgrepo-com.svg" alt="Fechar" id="fecharCaixaDeCompra" width="25px">
+        <h1>Deseja continuar a compra?</h1>
         <p id="preco"></p>
+        <p id="modal-origem"></p>
+        <p id="modal-destino"></p>
         <p id="partida"></p>
         <p id="chegada"></p>
         <p id="duracao"></p>
@@ -22,14 +24,22 @@
         <div id="recaptcha-container"></div>
         <button id="prosseguir">Prosseguir</button>
     </div>
-    <div class="divisor"></div>
     <div class="subheader">
         <div class="links">
             <a href="./home.html">Pesquisar</a>
             <a href="./favoritos.html">Favoritos</a>
         </div>
+        <div class="modo-teste-container">
+            <span>API Real</span>
+            <label class="switch">
+                <input type="checkbox" id="modo-teste-toggle">
+                <span class="slider"></span>
+            </label>
+            <span>Modo Teste</span>
+        </div>
         <button id="logout-button" class="logout-button">Sair</button>
     </div>
+    <div class="divisor"></div>
 <div class="container">
     <div>
         <label for="localPartidaInput">Partida</label>

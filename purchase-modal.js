@@ -9,9 +9,12 @@ window.onRecaptchaSuccess = function(token) {
 };
 
 function renderizarRecaptcha() {
-    if (recaptchaRenderizado) return;
+    if (recaptchaRenderizado) {
+        try { grecaptcha.reset(); } catch (e) { console.error("Erro ao resetar reCAPTCHA", e); }
+        return;
+    }
     const container = document.getElementById('recaptcha-container');
-    if (container) {
+    if (container && typeof grecaptcha !== 'undefined') {
         grecaptcha.render(container, {
             'sitekey' : '6Lei-zUrAAAAAMkrUl4hhNj9H7V1PLYJwt88CFUo',
             'callback' : 'onRecaptchaSuccess'
@@ -55,13 +58,17 @@ async function finalizarCompra() {
     document.getElementById('caixaDeCompra').style.display = 'none';
 }
 
-export function inicializarModal(itinerary, departureText, arrivalText, durationText, carrierText) {
+export function inicializarModal(itinerary, originText, destinationText, departureText, arrivalText, durationText, carrierText) {
     const caixaDeCompra = document.getElementById('caixaDeCompra');
+    
     document.getElementById('preco').textContent = `Preço: ${itinerary.price.formatted}`;
+    document.getElementById('modal-origem').textContent = originText;
+    document.getElementById('modal-destino').textContent = destinationText;
     document.getElementById('partida').textContent = departureText;
     document.getElementById('chegada').textContent = arrivalText;
     document.getElementById('duracao').textContent = durationText;
     document.getElementById('companhia').textContent = carrierText;
+
     if (caixaDeCompra) {
         caixaDeCompra.style.display = 'block';
         renderizarRecaptcha();
@@ -80,6 +87,7 @@ export function setupModalListeners() {
                 botao.removeEventListener('click', finalizarCompra);
                 botao.addEventListener('click', prosseguirParaCompra);
             }
+            recaptchaResolvido = false;
         });
     }
 

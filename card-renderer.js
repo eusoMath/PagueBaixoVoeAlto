@@ -1,9 +1,12 @@
-import { auth, adicionarVooFavorito, removerVooFavorito } from './firebase.js';
+import { auth, adicionarVooFavorito, removerVooFavorito, verificarVooFavorito } from './firebase.js';
 import { inicializarModal } from './purchase-modal.js';
 
 function exibirResultados(listaDeVoos, containerId, favoritosSet = new Set()) {
     const resultadosDiv = document.getElementById(containerId);
-    if (!resultadosDiv) return;
+    if (!resultadosDiv) {
+        console.error(`ERRO: Container com ID '${containerId}' não encontrado.`);
+        return;
+    }
 
     if (document.querySelectorAll(`#${containerId} .card`).length === 0) {
         resultadosDiv.innerHTML = '';
@@ -37,11 +40,12 @@ function exibirResultados(listaDeVoos, containerId, favoritosSet = new Set()) {
         });
         
         const price = document.createElement('h3');
-        price.textContent = `Preço: ${itinerary.price.formatted}`;
         const departure = document.createElement('p');
         const arrival = document.createElement('p');
         const duration = document.createElement('p');
         const marketingCarrier = document.createElement('p');
+        const origin = document.createElement('p');
+        const destination = document.createElement('p');
         
         const leg = itinerary.legs[0];
         const departureDate = new Date(leg.departure);
@@ -49,7 +53,13 @@ function exibirResultados(listaDeVoos, containerId, favoritosSet = new Set()) {
         const durationMinutes = leg.durationInMinutes;
         const hours = Math.floor(durationMinutes / 60);
         const minutes = durationMinutes % 60;
+        
+        const originName = leg.origin.name;
+        const destinationName = leg.destination.name;
 
+        price.textContent = `Preço: ${itinerary.price.formatted}`;
+        origin.textContent = `De: ${originName}`;
+        destination.textContent = `Para: ${destinationName}`;
         departure.textContent = `Partida: ${departureDate.toLocaleDateString('pt-BR')} ${departureDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
         arrival.textContent = `Chegada: ${arrivalDate.toLocaleDateString('pt-BR')} ${arrivalDate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
         duration.textContent = `Duração: ${hours}h ${minutes}m`;
@@ -57,12 +67,15 @@ function exibirResultados(listaDeVoos, containerId, favoritosSet = new Set()) {
 
         const comprarButton = document.createElement('button');
         comprarButton.textContent = 'Comprar';
+        
         comprarButton.addEventListener('click', () => {
-            inicializarModal(itinerary, departure.textContent, arrival.textContent, duration.textContent, marketingCarrier.textContent);
+            inicializarModal(itinerary, origin.textContent, destination.textContent, departure.textContent, arrival.textContent, duration.textContent, marketingCarrier.textContent);
         });
 
         card.appendChild(favoritarButton);
         card.appendChild(price);
+        card.appendChild(origin);
+        card.appendChild(destination);
         card.appendChild(departure);
         card.appendChild(arrival);
         card.appendChild(duration);

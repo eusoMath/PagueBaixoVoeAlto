@@ -4,8 +4,7 @@ import { inicializarAutocomplete, getLugarIds } from './autocomplete.js';
 import { exibirResultados } from './card-renderer.js';
 import { setupModalListeners } from './purchase-modal.js';
 
-const MODO_TESTE = false;
-
+let modoTesteAtivo = true;
 let todosOsVoosAtuais = [];
 let voosAtualmenteExibidos = 0;
 const voosPorPagina = 8;
@@ -26,40 +25,34 @@ async function buscarVoosLocais() {
 async function iniciarBusca() {
     const resultadosDiv = document.getElementById("resultados");
     if (!resultadosDiv) return;
+    
+    const formBusca = document.querySelector('.container');
+    
     resultadosDiv.innerHTML = '<h2>Buscando voos...</h2>';
-
     let voosEncontrados = [];
 
-    if (MODO_TESTE) {
-        const partidaTexto = document.getElementById("localPartidaInput").value.toLowerCase();
-        const chegadaTexto = document.getElementById("localChegadaInput").value.toLowerCase();
+    if (modoTesteAtivo) {
+        if(formBusca) formBusca.style.display = 'none';
         const todosOsVoos = await buscarVoosLocais();
-        
-        voosEncontrados = todosOsVoos.filter(voo => {
-            const origem = (voo.legs[0].origin && voo.legs[0].origin.name) ? voo.legs[0].origin.name.toLowerCase() : '';
-            const destino = (voo.legs[0].destination && voo.legs[0].destination.name) ? voo.legs[0].destination.name.toLowerCase() : '';
-            return origem.includes(partidaTexto) && destino.includes(chegadaTexto);
-        });
-
+        voosEncontrados = todosOsVoos;
     } else {
+        if(formBusca) formBusca.style.display = 'flex';
         const { partidaId, chegadaId } = getLugarIds();
         const dataPartida = document.getElementById("dataDePartida").value;
         const numAdultos = document.getElementById("adultos").value;
-
         if (!partidaId || !chegadaId || !dataPartida) {
-            alert("Por favor, preencha partida, chegada e data.");
             resultadosDiv.innerHTML = '<h3>Preencha todos os campos para iniciar a busca.</h3>';
             return;
         }
         voosEncontrados = await buscarVoosAmadeus(partidaId, chegadaId, dataPartida, numAdultos);
     }
-
+    
+    resultadosDiv.innerHTML = '';
     if (voosEncontrados && voosEncontrados.length > 0) {
-        if (!MODO_TESTE) {
-            voosEncontrados.sort((a, b) => a.price.raw - b.price.raw);
-        }
         todosOsVoosAtuais = voosEncontrados;
         voosAtualmenteExibidos = 0;
+        const secaoDeResultados = document.getElementById("sect-1");
+        if (secaoDeResultados) secaoDeResultados.style.height = 'auto';
         mostrarProximosVoos();
     } else {
         resultadosDiv.innerHTML = '<h2>Nenhum voo encontrado.</h2>';
@@ -74,12 +67,28 @@ function mostrarProximosVoos() {
     if (mostrarMaisButton) {
         mostrarMaisButton.style.display = (voosAtualmenteExibidos >= todosOsVoosAtuais.length) ? "none" : "block";
     }
-    const secaoDeVoos = document.getElementById("sect-1");
-    if (secaoDeVoos) {
-        secaoDeVoos.style.height = "fit-content";
+
+    const secaoDeResultados = document.getElementById("sect1");
+    if (secaoDeResultados) {
+        secaoDeResultados.style.height = "fit-content";
     }
 }
+
 document.addEventListener('DOMContentLoaded', () => {
+    const toggleSwitch = document.getElementById('modo-teste-toggle');
+    
+    const modoSalvo = localStorage.getItem('modoTeste');
+    modoTesteAtivo = modoSalvo === 'true';
+    if(toggleSwitch) {
+        toggleSwitch.checked = modoTesteAtivo;
+
+        toggleSwitch.addEventListener('change', (event) => {
+            modoTesteAtivo = event.target.checked;
+            localStorage.setItem('modoTeste', modoTesteAtivo);
+            iniciarBusca();
+        });
+    }
+    
     inicializarAutocomplete();
     setupModalListeners();
     
@@ -88,22 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
             lerTodosOsFavoritos(user.uid).then(favoritos => {
                 const favoritosIds = favoritos.map(voo => btoa(`${voo.legs[0].departure}-${voo.legs[0].arrival}-${voo.price.raw}`));
                 favoritosDoUsuario = new Set(favoritosIds);
-                if (MODO_TESTE) {
-                    iniciarBusca();
-                }
+                iniciarBusca();
             });
         } else {
             favoritosDoUsuario.clear();
-            if (MODO_TESTE) {
-                iniciarBusca();
-            }
+            iniciarBusca();
         }
     });
 
-
-    document.getElementById("Buscar").addEventListener("click", iniciarBusca);
-    document.getElementById("mostrarMaisButton").addEventListener("click", mostrarProximosVoos);
-
+    const buscarButton = document.getElementById("Buscar");
+    if(buscarButton) buscarButton.addEventListener("click", iniciarBusca);
+    
+    const mostrarMaisButton = document.getElementById("mostrarMaisButton");
+    if(mostrarMaisButton) mostrarMaisButton.addEventListener("click", mostrarProximosVoos);
 
     const logoutButton = document.getElementById('logout-button');
     if (logoutButton) {
