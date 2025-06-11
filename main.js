@@ -4,7 +4,7 @@ import { inicializarAutocomplete, getLugarIds } from './autocomplete.js';
 import { exibirResultados } from './card-renderer.js';
 import { setupModalListeners } from './purchase-modal.js';
 
-let modoTesteAtivo = true;
+let modoTesteAtivo = false;
 let todosOsVoosAtuais = [];
 let voosAtualmenteExibidos = 0;
 const voosPorPagina = 8;
